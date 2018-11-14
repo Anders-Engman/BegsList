@@ -2,20 +2,20 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     bio: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: true
     },
     image: {
       type: DataTypes.BLOB,
-      allowNull: true,
+      allowNull: true
     },
     begScore: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      defaultValue: 2.5,
+      defaultValue: 2.5
     },
     userName: {
       type: DataTypes.TEXT
@@ -28,8 +28,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE
     },
     status: {
-      type: DataTypes.ENUM('active', 'inactive'),
-      defaultValue: 'active'
+      type: DataTypes.ENUM("active", "inactive"),
+      defaultValue: "active"
     }
   });
   return User;
