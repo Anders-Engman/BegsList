@@ -6,7 +6,7 @@ var request = require("request");
 module.exports = function (app) {
   //Get Similar ebay Items 
   app.get("/api/ebay", function (req, res) {
-    var appId = "";
+    var appId = process.env.EBAY_APIKEY;
     var itemName = "jeans"; //TODO: item name will be based on the USER INPUT
 
     //Find the search ItemId
