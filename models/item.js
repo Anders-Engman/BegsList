@@ -1,17 +1,23 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Item = sequelize.define("Item", {
-    name: {
+    itemName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
-    reason: {
+    itemReason: {
       type: DataTypes.TEXT,
       allowNull: true,
+      validate: {
+        len: [1]
+      }
     },
     itemURL: {
       type: DataTypes.STRING,
       validate: {
-        isURL: true
+        isUrl: true
       }
     }
   });
