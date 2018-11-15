@@ -4,8 +4,9 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Item.findAll({
-      include: [db.User]
+      include: [db.User, db.Vote]
     }).then(function(dbItems) {
+      console.log(dbItems);
       res.render("index", {
         items: dbItems
       });

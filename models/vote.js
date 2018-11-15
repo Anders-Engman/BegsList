@@ -15,5 +15,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
+  // Vote.associate = function(models) {
+  //   // Associating Vote with Items
+  //   Vote.belongsTo(models.Item, {});
+  //   Vote.belongsTo(models.User, {});
+  // };
   return Vote;
 };
