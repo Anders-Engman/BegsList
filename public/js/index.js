@@ -109,4 +109,14 @@ $(document).ready(function() {
     $(".layout__side-bar").toggleClass("active");
     $(".layout__main").toggleClass("active");
   });
+
+  $(".up-vote").on("click", function() {
+    var itemId = $(this).data("id");
+    console.log("upvote", itemId);
+  });
+
+  $(".down-vote").on("click", function() {
+    var itemId = $(this).data("id");
+    console.log("downvote", itemId);
+  });
 });
