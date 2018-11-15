@@ -1,3 +1,140 @@
-.list-group-item {
-  line-height: 2.5;
+@import url("https://fonts.googleapis.com/css?family=Bentham|Open+Sans");
+
+/* Layout */
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.layout__main {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: width 375ms ease-in-out;
+}
+
+.layout__main.active {
+  width: calc(100% - 250px);
+}
+
+.layout__side-bar {
+  display: flex;
+  position: fixed;
+  min-width: 250px;
+  max-width: 250px;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  min-height: 100vh;
+  padding: 56px 32px;
+  background: #eeeeee;
+  transition: margin 375ms ease-in-out;
+}
+
+#sidebar {
+  width: 100%;
+}
+
+.layout__side-bar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layout__side-bar.active {
+  margin-left: -250px;
+}
+
+.layout__side-bar li {
+  margin-bottom: 16px;
+}
+
+#collapseToggle {
+  cursor: pointer;
+}
+
+.layout__navbar {
+  padding: 1.5rem 1rem;
+  box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.16);
+}
+
+#main-list {
+  margin-top: 40px;
+}
+
+.layout__item {
+  background-color: #eee;
+  margin-bottom: 16px;
+  padding: 16px 88px;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+}
+
+.layout__vote-container {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.layout__vote-content {
+  margin: 8px 24px;
+}
+
+/* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bentham", serif;
+}
+
+p,
+a,
+ul,
+li,
+blockquote,
+cite {
+  font-family: "Open Sans", sans-serif;
+}
+
+.typography__navbar {
+}
+
+.typography__site-heading {
+  font-size: 3rem;
+  color: #707070;
+}
+
+.typography__item-name {
+  color: #707070;
+  font-size: 1.5rem;
+}
+
+.typography__item-user {
+  opacity: 0.8;
+  font-weight: 200;
+}
+
+.layout__vote-container i {
+  font-size: 1.5rem;
+}
+
+.layout__vote-content .fa-arrow-alt-circle-up {
+  margin-right: 4px;
+}
+
+.layout__vote-content .fa-arrow-alt-circle-down {
+  margin-left: 4px;
+}
+
+footer {
+  margin-top: 80px;
+  text-align: center;
 }
