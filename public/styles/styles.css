@@ -104,6 +104,15 @@ cite {
   font-family: "Open Sans", sans-serif;
 }
 
+a {
+  transition: opacity 375ms ease-in-out;
+}
+
+a:hover {
+  text-decoration: none;
+  opacity: 0.75;
+}
+
 .typography__navbar {
 }
 
@@ -128,10 +137,24 @@ cite {
 
 .layout__vote-content .fa-arrow-alt-circle-up {
   margin-right: 4px;
+  transition: color 375ms ease-in-out;
 }
 
 .layout__vote-content .fa-arrow-alt-circle-down {
   margin-left: 4px;
+  transition: color 375ms ease-in-out;
+}
+
+.layout__vote-content a {
+  color: #707070;
+}
+
+.up-vote:hover {
+  color: hsl(130, 87%, 45%);
+}
+
+.down-vote:hover {
+  color: hsl(10, 87%, 45%);
 }
 
 footer {
