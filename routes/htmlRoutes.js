@@ -13,13 +13,13 @@ module.exports = function(app) {
   });
 
   app.get("/test-modal", function(req, res) {
-    db.User.findAll({}).then(function(dbItems) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbItems
-      });
-      console.log(dbItems);
+    // db.User.findAll({}).then(function(dbItems) {
+    res.render("test", {
+      // msg: "Welcome!",
+      // examples: dbItems
     });
+    // console.log(dbItems);
+    // });
   });
 
   // Load example page and pass in an example by id

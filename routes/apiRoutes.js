@@ -9,10 +9,15 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
+  app.post("/api/sign-up", function(req, res) {
     // db.Example.create(req.body).then(function(dbExample) {
     //   res.json(dbExample);
     // });
+
+    db.User.create(req.body).then(function(dbUser) {
+      console.log(dbUser);
+      res.send(dbUser);
+    });
   });
 
   // Delete an example by id

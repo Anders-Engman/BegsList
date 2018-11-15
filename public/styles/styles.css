@@ -1,87 +1,87 @@
 @import url("https://fonts.googleapis.com/css?family=Bentham|Open+Sans");
-
 /* Layout */
+
 .wrapper {
-  display: flex;
-  width: 100%;
+    display: flex;
+    width: 100%;
 }
 
 .layout__main {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transition: width 375ms ease-in-out;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: width 375ms ease-in-out;
 }
 
 .layout__main.active {
-  width: calc(100% - 250px);
+    width: calc(100% - 250px);
 }
 
 .layout__side-bar {
-  display: flex;
-  position: fixed;
-  min-width: 250px;
-  max-width: 250px;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  min-height: 100vh;
-  padding: 56px 32px;
-  background: #eeeeee;
-  transition: margin 375ms ease-in-out;
+    display: flex;
+    position: fixed;
+    min-width: 250px;
+    max-width: 250px;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    min-height: 100vh;
+    padding: 56px 32px;
+    background: #eeeeee;
+    transition: margin 375ms ease-in-out;
 }
 
 #sidebar {
-  width: 100%;
+    width: 100%;
 }
 
 .layout__side-bar-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .layout__side-bar.active {
-  margin-left: -250px;
+    margin-left: -250px;
 }
 
 .layout__side-bar li {
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 }
 
 #collapseToggle {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .layout__navbar {
-  padding: 1.5rem 1rem;
-  box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.16);
+    padding: 1.5rem 1rem;
+    box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.16);
 }
 
 #main-list {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .layout__item {
-  background-color: #eee;
-  margin-bottom: 16px;
-  padding: 16px 88px;
-  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+    background-color: #eee;
+    margin-bottom: 16px;
+    padding: 16px 88px;
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
 }
 
 .layout__vote-container {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .layout__vote-content {
-  margin: 8px 24px;
+    margin: 8px 24px;
 }
 
 /* Typography */
@@ -92,7 +92,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bentham", serif;
+    font-family: "Bentham", serif;
 }
 
 p,
@@ -101,63 +101,88 @@ ul,
 li,
 blockquote,
 cite {
-  font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 a {
-  transition: opacity 375ms ease-in-out;
+    transition: opacity 375ms ease-in-out;
 }
 
 a:hover {
-  text-decoration: none;
-  opacity: 0.75;
+    text-decoration: none;
+    opacity: 0.75;
 }
 
-.typography__navbar {
-}
+.typography__navbar {}
 
 .typography__site-heading {
-  font-size: 3rem;
-  color: #707070;
+    font-size: 3rem;
+    color: #707070;
 }
 
 .typography__item-name {
-  color: #707070;
-  font-size: 1.5rem;
+    color: #707070;
+    font-size: 1.5rem;
 }
 
 .typography__item-user {
-  opacity: 0.8;
-  font-weight: 200;
+    opacity: 0.8;
+    font-weight: 200;
 }
 
 .layout__vote-container i {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .layout__vote-content .fa-arrow-alt-circle-up {
-  margin-right: 4px;
-  transition: color 375ms ease-in-out;
+    margin-right: 4px;
+    transition: color 375ms ease-in-out;
 }
 
 .layout__vote-content .fa-arrow-alt-circle-down {
-  margin-left: 4px;
-  transition: color 375ms ease-in-out;
+    margin-left: 4px;
+    transition: color 375ms ease-in-out;
 }
 
 .layout__vote-content a {
-  color: #707070;
+    color: #707070;
 }
 
 .up-vote:hover {
-  color: hsl(130, 87%, 45%);
+    color: hsl(130, 87%, 45%);
 }
 
 .down-vote:hover {
-  color: hsl(10, 87%, 45%);
+    color: hsl(10, 87%, 45%);
 }
 
 footer {
-  margin-top: 80px;
-  text-align: center;
+    margin-top: 80px;
+    text-align: center;
 }
+
+.layout__signup-modal {
+    width: 60%;
+    margin: auto;
+    background-color: #eee;
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+    padding: 8px;
+}
+
+.layout__login-modal {
+    width: 60%;
+    margin: auto;
+    background-color: #eee;
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+    padding: 8px;
+}
+
+.form-item {
+    display: block;
+    width: 100%;
+}
+
+/* 
+.signup-form {
+    width: 100%;
+} */
