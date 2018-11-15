@@ -1,20 +1,6 @@
 <div class="layout__items-list row">
   {{> auth/login-modal}}
-  {{#each items}}
-  <div data-id="{{this.id}}" class="layout__item col-12 d-flex">
-    <a href="item/{{this.id}}" class="mr-auto">
-      <div class="layout__item-name typography__item-name">
-        {{this.name}}
-        <span class="typography__item-user">- {{this.User.name}}</span>
-      </div>
-    </a>
-    <div class="layout__vote-container">
-      <div class="layout__vote-content">
-        <a href="#" class="up-vote"><i class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-        <a href="#" class="down-vote"><i class="far fa-arrow-alt-circle-down fa-lg"></i></a>
-      </div>
-    </div>
-  </div>
-  {{/each}}
+  <br>
+  {{> auth/signup-modal}}
 
 </div>
