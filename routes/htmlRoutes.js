@@ -11,6 +11,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/test-modal", function(req, res) {
+    db.User.findAll({}).then(function(dbItems) {
+      res.render("index", {
+        msg: "Welcome!",
+        examples: dbItems
+      });
+      console.log(dbItems);
+    });
+  });
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function(
