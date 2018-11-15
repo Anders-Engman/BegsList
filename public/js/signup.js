@@ -10,9 +10,8 @@ var logInSubmit = $(".login-form-submit");
 $(document).ready(function() {
   signUpSubmit.on("click", function(e) {
     e.preventDefault();
-
     $.post("/api/sign-up", {
-      username: signUpUsername.val().trim(),
+      userName: signUpUsername.val().trim(),
       password: signUpPassword.val().trim(),
       bio: signUpBio.val().trim(),
       name: signUpName.val().trim(),
