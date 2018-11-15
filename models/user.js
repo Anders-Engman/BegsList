@@ -32,5 +32,10 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: "active"
     }
   });
+
+  User.associate = function(models) {
+    // Associating User with Items
+    User.hasMany(models.Item, {});
+  };
   return User;
 };
