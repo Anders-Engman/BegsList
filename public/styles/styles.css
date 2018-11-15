@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Bentham|Open+Sans");
-
 /* Layout */
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -160,4 +160,27 @@ a:hover {
 footer {
   margin-top: 80px;
   text-align: center;
+}
+
+.layout__signup-modal {
+  width: 60%;
+  margin: auto;
+  background-color: #eee;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+  padding: 8px;
+  margin-bottom: 32px;
+}
+
+.layout__login-modal {
+  width: 60%;
+  margin: auto;
+  background-color: #eee;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+  padding: 8px;
+  margin-bottom: 32px;
+}
+
+.form-item {
+  display: block;
+  width: 100%;
 }
