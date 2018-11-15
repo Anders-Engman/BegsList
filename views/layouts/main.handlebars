@@ -1,15 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
-  <title>Home Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Beg's List</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles/styles.css" type="text/css" />
 </head>
 
 <body>
-  {{{body}}}
+  <div class="wrapper">
+    <div class="layout__side-bar active">
+      <nav id="sidebar">
+        <div class="layout__side-bar-container">
+          <ul class="list-unstyled components">
+            <li><a href="">About Beg's List</a></li>
+            <li><a href="">Beg</a></li>
+            <li><a href="">Login/Sign-Up</a></li>
+          </ul>
+          <div id="collapseToggle" class="side-bar__collapse mt-auto text-center">
+            Collapse <i class="far fa-arrow-alt-circle-left"></i>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="layout__main">
+      <nav class="layout__navbar typography__navbar navbar sticky-top navbar-expand-xl navbar-light bg-light">
+        <div class="layout__navbar-nav container">
+          <button type="button" id="sidebarToggle" class="btn">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="typography__site-heading">Beg's List</h1>
+          <div class="layout__user-login"><a href="#">Login/Sign-Up</a></div>
+        </div>
+      </nav>
+      <main id="main-list">
+        <div class="container">
+          {{{body}}}
+        </div>
+      </main>
+      <footer>
+        <p>&copy; Beg's List 2018</p>
+      </footer>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="js/index.js" type="text/javascript"></script>
 </body>
 
 </html>
