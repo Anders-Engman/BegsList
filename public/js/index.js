@@ -102,6 +102,7 @@ $(document).ready(function() {
   $("#sidebarToggle").on("click", function() {
     $(".layout__side-bar").toggleClass("active");
     $(".layout__main").toggleClass("active");
+    $(".layout__items-list").toggleClass("active");
   });
 
   $("#collapseToggle").on("click", function() {

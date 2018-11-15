@@ -63,6 +63,15 @@
   margin-top: 40px;
 }
 
+.layout__items-list {
+  transition: margin 375ms ease-in-out;
+}
+
+.layout__items-list.active {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
 .layout__item {
   background-color: #eee;
   margin-bottom: 16px;
