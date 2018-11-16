@@ -1,15 +1,10 @@
 var db = require("../models");
 
+// ==== Debugging Functions ==== //
 // Log Sequelize Statements as raw SQL
 function sqlLogger(msg) {
   console.log("SQL Log:");
   console.log(msg);
-}
-
-function Color(hslObject) {
-  this.hue = hslObject.hue;
-  this.saturation = hslObject.saturation;
-  this.lightness = hslObject.lightness;
 }
 
 // Console log rank and color
@@ -25,6 +20,13 @@ logRankAndColor = function(results) {
   }
 };
 
+// Creat Color Constructor to add to returned Sequelize Model
+function Color(hslObject) {
+  this.hue = hslObject.hue;
+  this.saturation = hslObject.saturation;
+  this.lightness = hslObject.lightness;
+}
+
 // Sort Sequelize Query by the Items' voteScore
 sortByItemScoreSum = function(results) {
   results.sort(function(a, b) {
@@ -32,6 +34,7 @@ sortByItemScoreSum = function(results) {
   });
 };
 
+// Calculate the rate of Color change from top color to bottom color
 calcColorChange = function(topColor, bottomColor, listLength) {
   var colorDistance = {
     hue: topColor.hue - bottomColor.hue,
@@ -46,6 +49,7 @@ calcColorChange = function(topColor, bottomColor, listLength) {
   return colorChangePerItem;
 };
 
+// Set the div's item color based on it position relative to the topColor/topItem
 setItemColor = function(startColor, hslValue, itemRank) {
   return {
     hue: startColor.hue - hslValue.hue * itemRank,
@@ -55,23 +59,13 @@ setItemColor = function(startColor, hslValue, itemRank) {
 };
 
 insertItemColorVal = function(results) {
-  var itemListLength = results.length;
-  var greenest = {
-    hue: 130,
-    saturation: 87,
-    lightness: 45
-  };
-  var reddest = {
-    hue: 10,
-    saturation: 87,
-    lightness: 45
-  };
-
-  hslDeltaVal = calcColorChange(greenest, reddest, itemListLength);
-
-  for (var i = 0; i < itemListLength; i++) {
+  // Set topColor and bottomColor values for gradient change
+  var greenest = { hue: 130, saturation: 87, lightness: 45 };
+  var reddest = { hue: 10, saturation: 87, lightness: 45 };
+  hslDeltaVal = calcColorChange(greenest, reddest, results.length);
+  for (var i = 0; i < results.length; i++) {
     itemColor = setItemColor(greenest, hslDeltaVal, i);
-    results[i].dataValues.Color = new Color(itemColor);
+    results[i].Color = new Color(itemColor);
   }
 };
 
@@ -89,8 +83,6 @@ module.exports = function(app) {
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
-      // console.log(dbItems);
-      // logRankAndColor(dbItems);
       res.render("index", {
         items: dbItems
       });
