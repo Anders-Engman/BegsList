@@ -39,10 +39,10 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.user = require("./user.js")(sequelize, Sequelize);
-db.item = require("./item.js")(sequelize, Sequelize);
-db.comment = require("./comment.js")(sequelize, Sequelize);
-db.vote = require("./vote.js")(sequelize, Sequelize);
+// db.user = require("./user.js")(sequelize, Sequelize);
+// db.item = require("./item.js")(sequelize, Sequelize);
+// db.comment = require("./comment.js")(sequelize, Sequelize);
+// db.vote = require("./vote.js")(sequelize, Sequelize);
 
 // A User can: have many items, make many votes, make many comments
 // db.user.hasMany(db.item);
