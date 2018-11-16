@@ -44,21 +44,21 @@ db.Sequelize = Sequelize;
 // db.comment = require("./comment.js")(sequelize, Sequelize);
 // db.vote = require("./vote.js")(sequelize, Sequelize);
 
-// // A User can: have many items, make many votes, make many comments
+// A User can: have many items, make many votes, make many comments
 // db.user.hasMany(db.item);
 // db.user.hasMany(db.vote);
-// // db.user.hasMany(db.comment);
+// db.user.hasMany(db.comment);
 
-// // // // An item belongs to a user, has many comments, has many votes
+// An item belongs to a user, has many comments, has many votes
 // db.item.belongsTo(db.user);
-// // db.item.hasMany(db.comment);
+// db.item.hasMany(db.comment);
 // db.item.hasMany(db.vote);
 
-// // // A comment can belong to an item and to a user
-// // db.comment.belongsTo(db.item);
-// // db.comment.belongsTo(db.user);
+// A comment can belong to an item and to a user
+// db.comment.belongsTo(db.item);
+// db.comment.belongsTo(db.user);
 
-// // // A vote can belong to an item and a user
+// A vote can belong to an item and a user
 // db.vote.belongsTo(db.item);
 // db.vote.belongsTo(db.user);
 
