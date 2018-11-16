@@ -1,11 +1,11 @@
 <div class="layout__items-list row">
   {{#each items}}
-  <script> console.log(this);</script>
+  {{log this.Item}}
   <div data-id="{{this.Item.id}}" class="layout__item col-12 d-flex">
     <a href="item/{{this.Item.id}}" class="mr-auto">
       <div class="layout__item-name typography__item-name">
         {{this.Item.name}}
-        <span class="typography__item-user">- {{this.Item.User.name}}</span>
+        <span class="typography__item-user">- {{this.Item.User.name}} </span>
       </div>
     </a>
     <div class="layout__vote-container">
