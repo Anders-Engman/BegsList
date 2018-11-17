@@ -1,2 +1,9 @@
 {{!-- TODO: create an element that shows either a welcome message to the logged in user, or a prompt to login or sign
 up --}}
+<div class="inline-user">
+    {{#if user}}
+    Hello, {{user}}
+    {{else}}
+    Sign-up / Log-in
+    {{/if}}
+</div>
