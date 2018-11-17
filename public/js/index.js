@@ -98,16 +98,19 @@ var handleDeleteBtnClick = function() {
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
+// Beg's List Client Side Javascipt Vote Code
+
 $(document).ready(function() {
   $("#sidebarToggle").on("click", function() {
-    $(".layout__side-bar").toggleClass("active");
-    $(".layout__main").toggleClass("active");
-    $(".layout__items-list").toggleClass("active");
+    $(
+      ".layout__side-bar, .layout__main, .layout__items-list, .menu"
+    ).toggleClass("active");
   });
 
   $("#collapseToggle").on("click", function() {
-    $(".layout__side-bar").toggleClass("active");
-    $(".layout__main").toggleClass("active");
+    $(
+      ".layout__side-bar, .layout__main, .layout__items-list, .menu"
+    ).toggleClass("active");
   });
 
   $(".up-vote").on("click", function() {
@@ -118,5 +121,29 @@ $(document).ready(function() {
   $(".down-vote").on("click", function() {
     var itemId = $(this).data("id");
     console.log("downvote", itemId);
+  });
+
+  // Post Vote
+  $(".up-vote, .down-vote").on("click", function(event) {
+    //Dr. Spaceman User Id
+    var testUserId = 9;
+
+    //Toggle Button's Selected Class
+    $(this).toggleClass("selected");
+
+    // Make POST using the User's ID (temp Dr. Spaceman), the Item's ID, and the buttons value (1 or -1)
+    $.ajax({
+      method: "POST",
+      url: "api/votes/",
+      data: {
+        voteValue: $(this).data("val"),
+        ItemId: $(this).data("id"),
+        UserId: testUserId
+      }
+    }).then(function(response) {
+      event.preventDefault();
+      console.log("Anything?");
+      console.log(response);
+    });
   });
 });

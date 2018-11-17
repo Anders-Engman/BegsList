@@ -2,8 +2,8 @@ module.exports = function(sequelize, DataTypes) {
   var Vote = sequelize.define("Vote", {
     voteValue: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
-        allowNull: false,
         isValidVote(value) {
           if (Math.abs(value) !== 1) {
             throw new Error(
