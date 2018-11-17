@@ -10,15 +10,15 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.urlencoded({extended: false})); // possibly have to flip this for auth to work
+app.use(express.urlencoded({ extended: false })); // possibly have to flip this for auth to work
 app.use(express.json());
 app.use(express.static("public"));
 
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
 );
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Handlebars
 app.engine(
@@ -42,8 +42,8 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function () {
-  app.listen(PORT, function () {
+db.sequelize.sync(syncOptions).then(function() {
+  app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
