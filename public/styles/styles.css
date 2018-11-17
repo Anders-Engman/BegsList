@@ -60,6 +60,88 @@
   z-index: 0;
 }
 
+.layout__navbar-nav .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.layout__navbar-nav .container .active {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.menu {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+.menu span {
+  margin: 0 auto;
+  position: relative;
+  top: 12px;
+}
+.menu span:before,
+.menu span:after {
+  position: absolute;
+  content: "";
+}
+.menu span,
+.menu span:before,
+.menu span:after {
+  width: 30px;
+  height: 4px;
+  background-color: #777;
+  display: block;
+}
+.menu span:before {
+  margin-top: -12px;
+}
+.menu span:after {
+  margin-top: 12px;
+}
+.menu span {
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+  -webkit-transition-delay: 300ms;
+  transition-delay: 300ms;
+}
+.menu.active span {
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-transition-delay: 300ms;
+  transition-delay: 300ms;
+}
+.menu span:before {
+  -webkit-transition-property: margin, -webkit-transform;
+  transition-property: margin, transform;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transition-delay: 300ms, 0s;
+  transition-delay: 300ms, 0s;
+}
+.menu.active span:before {
+  margin-top: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition-delay: 0s, 300ms;
+  transition-delay: 0s, 300ms;
+}
+.menu span:after {
+  -webkit-transition-property: margin, -webkit-transform;
+  transition-property: margin, transform;
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transition-delay: 300ms, 0s;
+  transition-delay: 300ms, 0s;
+}
+.menu.active span:after {
+  margin-top: 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transition-delay: 0s, 300ms;
+  transition-delay: 0s, 300ms;
+}
+
 #main-list {
   margin-top: 40px;
 }
@@ -78,6 +160,11 @@
   margin-bottom: 16px;
   padding: 16px 88px;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+}
+
+.layout__item > a {
+  display: flex;
+  align-items: center;
 }
 
 .layout__vote-container {
@@ -116,9 +203,11 @@ cite {
 
 a {
   transition: opacity 375ms ease-in-out;
+  color: #777;
 }
 
 a:hover {
+  color: #777;
   text-decoration: none;
   opacity: 0.75;
 }
@@ -127,13 +216,13 @@ a:hover {
 }
 
 .typography__site-heading {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #707070;
 }
 
 .typography__item-name {
   color: #707070;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .typography__item-user {
@@ -159,11 +248,13 @@ a:hover {
   color: #707070;
 }
 
-.up-vote:hover {
+.up-vote:hover,
+.up-vote.selected {
   color: hsl(130, 87%, 45%);
 }
 
-layout__ .down-vote:hover {
+.down-vote:hover,
+.down-vote.selected {
   color: hsl(10, 87%, 45%);
 }
 

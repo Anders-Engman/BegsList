@@ -1,19 +1,30 @@
-<h1> Ebay API Testing! </h1>
-
-<br>
 <br>
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-6">
+            <h1> Ask the Universe for an Item</h1>
+            <div class="card">
+                <div class="card-header">
+                    Your Chosen Item
+                </div>
+                <div class="card-body">
+                    <div id="chosen-item-div" class="text-center m-auto" style="width: 380px">
+                        {{!-- FINISHED TODO: DISPLAY THE CHOSEN ITEM HERE --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <br>
             <form id="item-form">
                 <div class="container">
                     <div class="row">
                         <div class="col-10">
-                            <input class="new-item-input form-control" placeholder="Add a item" type="text" />
+                            <input class="new-item-input form-control" placeholder="Search An Item" type="text" />
                         </div>
                         <div class="col-2">
-                            <button id="find-items" type="submit" class="btn btn-danger">Search Items</button>
+                            <button id="find-items" type="submit" class="btn btn-danger">Search</button>
                         </div>
                     </div>
                     <br>
@@ -25,7 +36,7 @@
                     </div> --}}
                     <div class="row">
                         <div class="col-10">
-                            <textarea class="form-control" id="reason-textarea" rows="3" placeholder="Add a Reason(s)"></textarea>
+                            <textarea class="form-control" id="reason-textarea" rows="10" placeholder="Add a Reason(s) Why You Need This Item"></textarea>
                         </div>
                     </div>
                     <br>
@@ -37,9 +48,6 @@
                 </div>
 
             </form>
-        </div>
-        <div class="col-5">
-
 
         </div>
     </div>
@@ -47,9 +55,16 @@
 
 </div>
 
-<div class="container">
-    <div id="display-similar-items">
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            Your Search Items
+        </div>
+        <div class="card-body">
+            <div id="display-similar-items">
 
+            </div>
+        </div>
     </div>
 
 </div>
