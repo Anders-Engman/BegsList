@@ -1,72 +1,113 @@
-$(function () {
-    // Getting a reference to the input field where user adds a new item
-    var $newItemInput = $("input.new-item-input");
-    // Our new items will go inside the itemContainer
-    //var $itemContainer = $(".item-container");
-    $(document).on("click", "#find-items", displaySimilarItems);
-    //$(document).on("submit", "#item-form", insertItem);
+$(function() {
+  // Getting a reference to the input field where user adds a new item
+  var $newItemInput = $("input.new-item-input");
+  $(document).on("click", "#find-items", displaySimilarItems);
 
-    // Our initial items array
-    var items = [];
+  // Function to empty out previous searches
+  function clear() {
+    $("#display-similar-items").empty();
+  }
 
-    // Getting items from database when page loads
-    getItems();
+  //Displaying similar items
+  function displaySimilarItems(event) {
+    event.preventDefault();
 
-    //Displaying similar items
-    function displaySimilarItems(event) {
-        event.preventDefault();
-        //insertItem(event);
-        var item = {
-            name: $newItemInput.val().trim()
-        };
-        $.post("/api/searchItems", item, function (data) {
-            console.log(data);
+    //empty out previous searches
+    clear();
 
-            var similarItemsDiv = $("<div>");
+    var item = {
+      name: $newItemInput.val().trim()
+    };
+    $.post("/api/searchItems", item, function(data) {
+      console.log(data);
 
-            for (var i = 0; i < data.length; i++) {
+      var similarItemsDiv = $("<div>");
+      similarItemsDiv.addClass("row d-flex align-self-center flex-wrap");
 
-                var title = $("<h3>");
-                title.text(data[i].title)
-                var image = $("<img>");
-                image.attr("src", data[i].imageURL);
-                var price = $("<p>");
-                price.text("US $" + data[i].price);
-                var viewSite = $("<a>");
-                viewSite.attr("href", data[i].viewSite);
-                viewSite.text("visit page");
-                var oneItemDiv = $("<div>");
-                oneItemDiv.attr("id", i);
-                oneItemDiv.append(title);
-                oneItemDiv.append(image);
-                oneItemDiv.append(price);
-                oneItemDiv.append(viewSite);
-                similarItemsDiv.append(oneItemDiv);
-            }
+      for (var i = 0; i < data.length; i++) {
+        //title
+        var title = $("<a>");
+        title.text(data[i].title);
+        title.attr("href", data[i].viewSite);
+        //Image
+        var image = $("<img>");
+        image.attr("src", data[i].imageURL);
+        image.attr("style", "height:230px; weight: 380px");
+        //Price
+        var price = $("<p>");
+        price.text("US $" + data[i].price);
 
-            $("#display-similar-items").append(similarItemsDiv);
-        });
-    }
+        //Button to choose
+        var chooseButton = $("<button>");
+        chooseButton.addClass("btn btn-info");
+        chooseButton.attr("id", "choose-button");
+        chooseButton.text("Choose");
+        chooseButton.attr("data-title", data[i].title);
+        chooseButton.attr("data-imageURL", data[i].imageURL);
+        chooseButton.attr("data-price", data[i].price);
+        chooseButton.attr("data-viewSite", data[i].viewSite);
 
-    // This function grabs items from the database and updates the view
-    function getItems() {
-        $.get("/api/items", function (data) {
-            console.log(data); //showing all data inside the database
-            items = data;
-        });
-    }
+        //Div to wrap the four elements above up
+        var oneItemDiv = $("<div>");
+        oneItemDiv.addClass("col-sm-3 p-3");
+        oneItemDiv.attr("id", i);
+        oneItemDiv.append(image);
+        oneItemDiv.append(title);
+        oneItemDiv.append(price);
+        oneItemDiv.append(chooseButton);
+        similarItemsDiv.append(oneItemDiv);
+      }
 
-    // This function inserts a new item into our database and then updates the view
-    function insertItem(event) {
-        event.preventDefault();
-        var item = {
-            name: $newItemInput.val().trim()
-        };
-        $.post("/api/items", item, function (data) {
-            //console.log(data);
-            location.reload();
-        });
-        $newItemInput.val("");
-    }
+      $("#display-similar-items").append(similarItemsDiv);
+    });
+  }
 
+  $(document).on("click", "#choose-button", function(event) {
+    event.preventDefault();
+    //TODO: DISPLAY THE CHOSEN ITEM HERE //FINISHED
+    var title = $(this).attr("data-title");
+    var imageURL = $(this).attr("data-imageURL");
+    var price = $(this).attr("data-price");
+    var viewSite = $(this).attr("data-viewSite");
+
+    //chosen Item title
+    var chosenItemTitle = $("<a>");
+    chosenItemTitle.text(title);
+    chosenItemTitle.attr("href", viewSite);
+    //chosen Item Image
+    var chosenItemImage = $("<img>");
+    chosenItemImage.attr("src", imageURL);
+    chosenItemImage.attr("style", "height:230px; weight: 380px");
+    chosenItemImage.addClass("mx-auto d-block");
+    //chosen Item Price
+    var chosenItemPrice = $("<p>");
+    chosenItemPrice.text("US $" + price);
+
+    //Image Div
+    var imageDiv = $("<div>");
+    // imageDiv.addClass("float-left");
+    imageDiv.append(chosenItemImage);
+    //Text Div
+    var textDiv = $("<div style='clear: left'>");
+    textDiv.append(chosenItemTitle);
+    textDiv.append(chosenItemPrice);
+
+    $("#chosen-item-div").append(imageDiv);
+    $("#chosen-item-div").append(textDiv);
+
+    //TODO: CREATE A NEW SUBMIT BUTTON
+    //TODO: CREATE A REASON TEXTAREA FORM
+  });
+
+  //TODO: CREATE A EVENT LISTENER FOR THE SUBMIT BUTTON
+
+  // Getting items from database when page loads
+  // getItems();
+  // This function grabs items from the database and updates the view
+  // function getItems() {
+  //     $.get("/api/items", function (data) {
+  //         console.log(data); //showing all data inside the database
+  //         items = data;
+  //     });
+  // }
 });
