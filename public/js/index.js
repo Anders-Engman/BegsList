@@ -139,10 +139,11 @@ $(document).ready(function() {
         voteValue: $(this).data("val"),
         ItemId: $(this).data("id"),
         UserId: testUserId
-      },
-      function() {
-        window.location.href = "/";
       }
+    }).then(function(response) {
+      event.preventDefault();
+      console.log("Anything?");
+      console.log(response);
     });
   });
 });
