@@ -4,12 +4,35 @@ require("dotenv").config();
 var request = require("request");
 
 module.exports = function(app) {
+
+  app.post("/api/sign-up", function(req, res) {
+    db.User.create(req.body)
+      .then(function(dbUser) {
+        console.log(dbUser);
+        res.send(dbUser);
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+      });
+  });
+
+  app.post("/api/log-in", passport.authenticate("local"), function(req, res) {
+    console.log("HEY HEY HEY", req.body);
+    res.send("/");
+  });
+
   // GET route for getting all of the items
   app.get("/api/items", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {
       res.json(dbItem);
       console.log(dbItem);
     });
+  });
+
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
   });
 
   //GET Similar Search Items
@@ -65,8 +88,7 @@ module.exports = function(app) {
       }
     });
   });
-
-  module.exports = function(app) {
+  
     // Create a new user
     app.post("/api/sign-up", function(req, res) {
       db.User.create(req.body)
