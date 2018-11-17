@@ -1,19 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
   var Vote = sequelize.define("Vote", {
-    upVote: {
+    voteValue: {
       type: DataTypes.INTEGER,
       validate: {
-        max: 1,
-        isNumeric: true
-      }
-    },
-    downVote: {
-      type: DataTypes.INTEGER,
-      validate: {
-        max: 1,
-        isNumeric: true
+        allowNull: false,
+        isValidVote(value) {
+          if (Math.abs(value) !== 1) {
+            throw new Error(
+              "UpVote/DownVote value must have an absolute value of 1"
+            );
+          }
+        }
       }
     }
   });
+
+  Vote.associate = function(models) {
+    // Associating Vote with Items
+    Vote.belongsTo(models.Item, {});
+    Vote.belongsTo(models.User, {});
+  };
   return Vote;
 };

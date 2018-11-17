@@ -48,6 +48,8 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     // Associating User with Items
     User.hasMany(models.Item, {});
+    User.hasMany(models.Vote, {});
+    User.hasMany(models.Comment, {});
   };
   return User;
 };
