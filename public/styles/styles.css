@@ -57,6 +57,7 @@
 .layout__navbar {
   padding: 1.5rem 1rem;
   box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.16);
+  z-index: 0;
 }
 
 .layout__navbar-nav .container {
@@ -263,24 +264,56 @@ footer {
 }
 
 .layout__signup-modal {
-  width: 60%;
+  display: none;
+  position: fixed;
+  width: 40%;
   margin: auto;
   background-color: #eee;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
   padding: 8px;
   margin-bottom: 32px;
+  align-content: center;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .layout__login-modal {
-  width: 60%;
+  display: none;
+  position: fixed;
+  width: 40%;
   margin: auto;
   background-color: #eee;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
   padding: 8px;
   margin-bottom: 32px;
+  align-content: center;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-item {
   display: block;
   width: 100%;
+}
+
+.layout__inline-user {
+  /* display: block;
+  width: 100%; */
+}
+
+.modal-obscure {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 1;
 }
