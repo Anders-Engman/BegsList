@@ -49,7 +49,7 @@ db.Sequelize = Sequelize;
 // db.user.hasMany(db.vote);
 // db.user.hasMany(db.comment);
 
-// // An item belongs to a user, has many comments, has many votes
+// An item belongs to a user, has many comments, has many votes
 // db.item.belongsTo(db.user);
 // db.item.hasMany(db.comment);
 // db.item.hasMany(db.vote);

@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Item with Posts
     // When an Item is deleted, also delete any associated Posts
     Item.belongsTo(models.User, {});
+    Item.hasMany(models.Vote, {});
   };
   return Item;
 };
