@@ -2,22 +2,23 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    // db.item.findAll({}).then(function(dbExamples) {
-    //   res.json(dbExamples);
-    // });
-  });
-
-  // Create a new example
+  // Create a new user
   app.post("/api/sign-up", function(req, res) {
-    // db.Example.create(req.body).then(function(dbExample) {
-    //   res.json(dbExample);
-    // });
-
-    db.User.create(req.body).then(function(dbUser) {
-      console.log(dbUser);
-      res.send(dbUser);
+    db.User.create(req.body)
+      .then(function(dbUser) {
+        console.log(dbUser);
+        res.redirect(307, "/api/log-in");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+      });
+  });
+  // log in user
+  app.get("/api/log-in", function(req, res) {
+    res.render("test", passport.authenticate("local"), function(req, res) {
+      console.log("hey");
+      res.json(req.body.user);
     });
   });
 

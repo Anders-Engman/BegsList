@@ -14,6 +14,8 @@
 </head>
 
 <body>
+
+
   <div class="wrapper">
     <div class="layout__side-bar active">
       <nav id="sidebar">
@@ -21,7 +23,7 @@
           <ul class="list-unstyled components">
             <li><a href="">About Beg's List</a></li>
             <li><a href="">Beg</a></li>
-            <li><a href="">Login/Sign-Up</a></li>
+            <li>{{> auth/inline-user}}</li>
           </ul>
           <div id="collapseToggle" class="side-bar__collapse mt-auto text-center">
             Collapse <i class="far fa-arrow-alt-circle-left"></i>
@@ -38,7 +40,7 @@
           <a href="/">
             <h1 class="typography__site-heading">Beg's List</h1>
           </a>
-          <div class="layout__user-login"><a href="#">Login/Sign-Up</a></div>
+          {{> auth/inline-user}}
         </div>
       </nav>
       <main id="main-list">
@@ -51,6 +53,7 @@
       </footer>
     </div>
   </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

@@ -1,9 +1,9 @@
 {{!-- TODO: create an element that shows either a welcome message to the logged in user, or a prompt to login or sign
 up --}}
-<div class="inline-user">
+<div class="layout__inline-user">
     {{#if user}}
     Hello, {{user}}
     {{else}}
-    Sign-up / Log-in
+    <a href="#" class="signup-button">Sign-up</a> / <a href="#" class="login-button">Log-in</a>
     {{/if}}
 </div>
