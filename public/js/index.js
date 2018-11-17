@@ -102,15 +102,15 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 $(document).ready(function() {
   $("#sidebarToggle").on("click", function() {
-    $(".layout__side-bar, .layout__main, .layout__items-list").toggleClass(
-      "active"
-    );
+    $(
+      ".layout__side-bar, .layout__main, .layout__items-list, .menu"
+    ).toggleClass("active");
   });
 
   $("#collapseToggle").on("click", function() {
-    $(".layout__side-bar, .layout__main, .layout__items-list").toggleClass(
-      "active"
-    );
+    $(
+      ".layout__side-bar, .layout__main, .layout__items-list, .menu"
+    ).toggleClass("active");
   });
 
   $(".up-vote").on("click", function() {
