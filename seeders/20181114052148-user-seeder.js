@@ -67,6 +67,14 @@ module.exports = {
         password: "Gordon",
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: "Jonathan the Assistant - Test User (No Voting Record)",
+        bio: "Some day all this will be ours sir",
+        username: "jAssistant",
+        password: "jonahy",
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]);
   },
