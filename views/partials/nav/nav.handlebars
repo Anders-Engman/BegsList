@@ -1,0 +1,11 @@
+<nav class="layout__navbar typography__navbar navbar sticky-top navbar-expand-xl navbar-light bg-light">
+    <div class="layout__navbar-nav container">
+        <button type="button" id="sidebarToggle" class="btn">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="/">
+            <h1 class="typography__site-heading">Beg's List</h1>
+        </a>
+        {{> auth/inline-user user.userName = "Alex"}}
+    </div>
+</nav>
