@@ -4,7 +4,6 @@ require("dotenv").config();
 var request = require("request");
 
 module.exports = function(app) {
-
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
       .then(function(dbUser) {
@@ -88,92 +87,91 @@ module.exports = function(app) {
       }
     });
   });
-  
-    // Create a new user
-    app.post("/api/sign-up", function(req, res) {
-      db.User.create(req.body)
-        .then(function(dbUser) {
-          console.log(dbUser);
-          res.redirect(307, "/api/log-in");
-        })
-        .catch(function(err) {
-          console.log(err);
-          res.json(err);
-        });
-    });
-    // log in user
-    app.get("/api/log-in", function(req, res) {
-      res.render("test", passport.authenticate("local"), function(req, res) {
-        console.log("hey");
-        res.json(req.body.user);
+
+  // Create a new user
+  app.post("/api/sign-up", function(req, res) {
+    db.User.create(req.body)
+      .then(function(dbUser) {
+        console.log(dbUser);
+        res.redirect(307, "/api/log-in");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
       });
+  });
+  // log in user
+  app.get("/api/log-in", function(req, res) {
+    res.render("test", passport.authenticate("local"), function(req, res) {
+      console.log("hey");
+      res.json(req.body.user);
     });
+  });
 
-    // Delete an example by id
-    app.delete("/api/examples/:id", function(req, res) {
-      // db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      //   dbExample
-      // ) {
-      //   res.json(dbExample);
-      // });
-    });
+  // Delete an example by id
+  app.delete("/api/examples/:id", function(req, res) {
+    // db.Example.destroy({ where: { id: req.params.id } }).then(function(
+    //   dbExample
+    // ) {
+    //   res.json(dbExample);
+    // });
+  });
 
-    // Toggle Vote by UserId, ItemId, and voteValue
-    app.post("/api/votes", function(req, res) {
-      console.log(req.body);
+  // Toggle Vote by UserId, ItemId, and voteValue
+  app.post("/api/votes", function(req, res) {
+    console.log(req.body);
 
-      // Search Database to see if a Vote for that ItemId has been made by that UserId
-      db.Vote.find({
-        where: {
+    // Search Database to see if a Vote for that ItemId has been made by that UserId
+    db.Vote.find({
+      where: {
+        ItemId: req.body.ItemId,
+        UserId: req.body.UserId
+      }
+    }).then(vote => {
+      // If that Vote DOES NOT exist,
+      if (!vote) {
+        console.log("new vote!");
+
+        // Create that vote
+        db.Vote.create({
+          voteValue: req.body.voteValue,
           ItemId: req.body.ItemId,
           UserId: req.body.UserId
-        }
-      }).then(vote => {
-        // If that Vote DOES NOT exist,
-        if (!vote) {
-          console.log("new vote!");
-
-          // Create that vote
-          db.Vote.create({
-            voteValue: req.body.voteValue,
-            ItemId: req.body.ItemId,
-            UserId: req.body.UserId
+        }).then(vote => {
+          res.send({ newVote: true });
+        });
+      }
+      // If the Vote DOES exist,
+      else {
+        console.log("existing vote!");
+        //check to see if the voteValue is equal
+        if (vote.voteValue !== req.body.voteValue) {
+          db.Vote.destroy({
+            where: {
+              ItemId: req.body.ItemId,
+              UserId: req.body.UserId
+            }
           }).then(vote => {
-            res.send({ newVote: true });
-          });
-        }
-        // If the Vote DOES exist,
-        else {
-          console.log("existing vote!");
-          //check to see if the voteValue is equal
-          if (vote.voteValue !== req.body.voteValue) {
-            db.Vote.destroy({
-              where: {
-                ItemId: req.body.ItemId,
-                UserId: req.body.UserId
-              }
-            }).then(vote => {
-              db.Vote.create({
-                voteValue: req.body.voteValue,
-                ItemId: req.body.ItemId,
-                UserId: req.body.UserId
-              }).then(vote => {
-                res.json(vote);
-              });
-            });
-          } else {
-            // If the req.body.voteValue == drop that Vote
-            db.Vote.destroy({
-              where: {
-                ItemId: req.body.ItemId,
-                UserId: req.body.UserId
-              }
+            db.Vote.create({
+              voteValue: req.body.voteValue,
+              ItemId: req.body.ItemId,
+              UserId: req.body.UserId
             }).then(vote => {
               res.json(vote);
             });
-          }
+          });
+        } else {
+          // If the req.body.voteValue == drop that Vote
+          db.Vote.destroy({
+            where: {
+              ItemId: req.body.ItemId,
+              UserId: req.body.UserId
+            }
+          }).then(vote => {
+            res.json(vote);
+          });
         }
-      });
+      }
     });
-  };
+  });
 };
