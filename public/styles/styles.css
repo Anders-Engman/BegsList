@@ -130,9 +130,11 @@ cite {
 
 a {
   transition: opacity 375ms ease-in-out;
+  color: #777;
 }
 
 a:hover {
+  color: #777;
   text-decoration: none;
   opacity: 0.75;
 }

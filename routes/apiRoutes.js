@@ -108,7 +108,7 @@ module.exports = function(app) {
           ItemId: req.body.ItemId,
           UserId: req.body.UserId
         }).then(vote => {
-          res.send(true);
+          res.send({ newVote: true });
         });
       }
       // If the Vote DOES exist,
@@ -127,7 +127,7 @@ module.exports = function(app) {
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }).then(vote => {
-              res.send(true);
+              res.json(vote);
             });
           });
         } else {
@@ -138,7 +138,7 @@ module.exports = function(app) {
               UserId: req.body.UserId
             }
           }).then(vote => {
-            res.send(vote);
+            res.json(vote);
           });
         }
       }

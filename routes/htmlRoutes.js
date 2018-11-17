@@ -90,13 +90,13 @@ module.exports = function(app) {
   });
 
   //load items page (Beg input and suggested items list)
-  app.get("/items", function (req, res) {
-    db.Item.findAll({}).then(function (dbItem) {
+  app.get("/items", function(req, res) {
+    db.Item.findAll({}).then(function(dbItem) {
       res.render("items");
     });
   });
 
-  app.get("/test-modal", function (req, res) {
+  app.get("/test-modal", function(req, res) {
     // db.User.findAll({}).then(function(dbItems) {
     res.render("test", {
       // msg: "Welcome!",
@@ -107,14 +107,12 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function (req, res) {
+  app.get("/example/:id", function(req, res) {
     db.Example.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function (
-      dbExample
-    ) {
+    }).then(function(dbExample) {
       res.render("example", {
         example: dbExample
       });
@@ -122,7 +120,7 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
   });
 };

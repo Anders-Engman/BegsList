@@ -182,13 +182,6 @@ module.exports = {
         voteValue: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-        UserId: 7,
-        ItemId: 5
-      },
-      {
-        voteValue: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
         UserId: 1,
         ItemId: 5
       },
@@ -231,8 +224,373 @@ module.exports = {
         voteValue: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 5
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         UserId: 8,
         ItemId: 5
+      },
+      // Rogaine - (med-high rank )
+
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 1,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 2,
+        ItemId: 6
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 3,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 4,
+        ItemId: 6
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 5,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 6,
+        ItemId: 6
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 8,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 10,
+        ItemId: 6
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 11,
+        ItemId: 6
+      },
+
+      // Cheese Puffs - (med-low rank )
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 1,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 2,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 3,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 4,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 5,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 6,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 8,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 10,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 11,
+        ItemId: 7
+      },
+
+      // Jane Krakowski - (very low rank, 1 upV, 9 dV )
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 1,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 2,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 3,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 4,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 5,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 6,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 8,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 10,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 11,
+        ItemId: 7
+      },
+      // Lambo - (very low rank, 1 upV, 9 dV )
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 1,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 2,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 3,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 4,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 5,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 6,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 7
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 8,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 10,
+        ItemId: 7
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 11,
+        ItemId: 7
+      },
+      // Treadmill - (very low rank, 1 upV, 9 dV )
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 1,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 2,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 3,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 4,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 5,
+        ItemId: 8
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 6,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 7,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 8,
+        ItemId: 8
+      },
+      {
+        voteValue: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 10,
+        ItemId: 8
+      },
+      {
+        voteValue: -1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        UserId: 11,
+        ItemId: 8
       }
     ]);
   },

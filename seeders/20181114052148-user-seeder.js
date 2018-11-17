@@ -75,6 +75,23 @@ module.exports = {
         password: "jonahy",
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: "Dennis Duffy",
+        bio: "All hail the Beeper King",
+        username: "b33p3rking",
+        password: "lizlovesme",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: "Devon Banks",
+        bio:
+          "Former GE Exec now stay at home Dad. Happy to get out of the ratrace.",
+        username: "daddybanks",
+        password: "makingthisup",
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]);
   },
