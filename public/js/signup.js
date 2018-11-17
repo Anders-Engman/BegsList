@@ -37,13 +37,13 @@ $(document).ready(function() {
   signUpLink.on("click", function(e) {
     e.preventDefault();
     modalObscure.css("display", "grid");
-    signUpModal.css("display", "grid");
+    signUpModal.css("display", "block");
   });
 
   logInLink.on("click", function(e) {
     e.preventDefault();
     modalObscure.css("display", "grid");
-    loginModal.css("display", "grid");
+    loginModal.css("display", "block");
   });
   $(window).keydown(function(e) {
     if (e.keyCode === 27) {
