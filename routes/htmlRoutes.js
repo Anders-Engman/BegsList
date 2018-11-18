@@ -91,6 +91,7 @@ module.exports = function(app) {
   });
   // Load homepage
   app.get("/", isAuthenticated, function(req, res) {
+    console.log(req.user.name);
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
@@ -103,7 +104,8 @@ module.exports = function(app) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
       res.render("index", {
-        items: dbItems
+        items: dbItems,
+        user: req.user
       });
     });
   });
