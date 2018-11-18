@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   // Getting a reference to the input field where user adds a new item
   var $newItemInput = $("input.new-item-input");
   $(document).on("click", "#find-items", displaySimilarItems);
@@ -18,13 +18,14 @@ $(function() {
     var item = {
       name: $newItemInput.val().trim()
     };
-    $.post("/api/searchItems", item, function(data) {
+    $.post("/api/searchItems", item, function (data) {
       console.log(data);
 
       var similarItemsDiv = $("<div>");
       similarItemsDiv.addClass("row d-flex align-self-center flex-wrap");
 
       for (var i = 0; i < data.length; i++) {
+
         //title
         var title = $("<a>");
         title.text(data[i].title);
@@ -37,7 +38,7 @@ $(function() {
         var price = $("<p>");
         price.text("US $" + data[i].price);
 
-        //Button to choose
+        //Button to choose 
         var chooseButton = $("<button>");
         chooseButton.addClass("btn btn-info");
         chooseButton.attr("id", "choose-button");
@@ -47,7 +48,7 @@ $(function() {
         chooseButton.attr("data-price", data[i].price);
         chooseButton.attr("data-viewSite", data[i].viewSite);
 
-        //Div to wrap the four elements above up
+        //Div to wrap the four elements above up 
         var oneItemDiv = $("<div>");
         oneItemDiv.addClass("col-sm-3 p-3");
         oneItemDiv.attr("id", i);
@@ -59,12 +60,13 @@ $(function() {
       }
 
       $("#display-similar-items").append(similarItemsDiv);
+
     });
   }
 
-  $(document).on("click", "#choose-button", function(event) {
+  $(document).on("click", "#choose-button", function (event) {
     event.preventDefault();
-    //TODO: DISPLAY THE CHOSEN ITEM HERE //FINISHED
+    //FINISHED TODO: DISPLAY THE CHOSEN ITEM HERE 
     var title = $(this).attr("data-title");
     var imageURL = $(this).attr("data-imageURL");
     var price = $(this).attr("data-price");
@@ -95,11 +97,60 @@ $(function() {
     $("#chosen-item-div").append(imageDiv);
     $("#chosen-item-div").append(textDiv);
 
-    //TODO: CREATE A NEW SUBMIT BUTTON
-    //TODO: CREATE A REASON TEXTAREA FORM
+    //FINISHED TODO: CREATE A NEW SUBMIT BUTTON 
+    var submitButton = $("<button>");
+    submitButton.addClass("btn btn-primary");
+    submitButton.attr("id", "submit-button");
+    submitButton.text("Submit");
+    submitButton.attr("data-title", title);
+    submitButton.attr("data-imageURL", imageURL);
+    submitButton.attr("data-price", price);
+    submitButton.attr("data-viewSite", viewSite);
+
+    //FINISHED TODO: CREATE A REASON TEXTAREA FORM 
+    var reasonText = $("<textarea>");
+    reasonText.addClass("form-control mb-3");
+    reasonText.attr("id", "reason-textarea");
+    reasonText.attr("rows", "10");
+    reasonText.attr("placeholder", "Add a Reason(s) Why You Need This Item");
+
+
+    $("#chosen-item-div").append(reasonText);
+    $("#chosen-item-div").append(submitButton);
   });
 
-  //TODO: CREATE A EVENT LISTENER FOR THE SUBMIT BUTTON
+
+  //FINISHED TODO: CREATE A EVENT LISTENER FOR THE SUBMIT BUTTON 
+  $(document).on("click", "#submit-button", function (event) {
+
+    //reason text 
+    var showReasonText = $("#reason-textarea").val().trim();
+    console.log(showReasonText);
+
+
+    var itemName = $(this).attr("data-title");
+    var itemURL = $(this).attr("data-viewSite");
+    var reason = showReasonText;
+
+    var newItem = {
+      name: itemName,
+      itemURL: itemURL,
+      reason: reason
+    }
+
+    $.post("/api/items", newItem, function () {
+      window.location.href = "/";
+    })
+
+
+  });
+
+  //TODO: CREATE A "MORE" BUTTON TO SHOW EIGHT ITEMS AT A TIME
+
+
+
+  //TODO: RESPONSIVE DESIGN FOR THE ITEM PAGE
+
 
   // Getting items from database when page loads
   // getItems();
@@ -110,4 +161,6 @@ $(function() {
   //         items = data;
   //     });
   // }
+
+
 });

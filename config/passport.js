@@ -9,6 +9,7 @@ passport.use(
       usernameField: "userName"
     },
     function(userName, password, done) {
+      console.log(userName, password);
       db.User.findOne({ where: { userName: userName } }).then(function(dbUser) {
         if (!dbUser) {
           return done(null, false, {
