@@ -108,9 +108,17 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/items/:id", function(req, res) {
-    db.Item.findAll({}).then(function(dbExample) {
+    console.log(req.params.id);
+    db.Item.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: {
+        model: db.User
+      }
+    }).then(function(dbItem) {
       res.render("item-single", {
-        example: dbExample
+        item: dbItem
       });
     });
   });
