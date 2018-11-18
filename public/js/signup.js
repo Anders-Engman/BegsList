@@ -13,6 +13,7 @@ var modalObscure = $(".modal-obscure");
 var loginModal = $(".layout__login-modal");
 var signUpModal = $(".layout__signup-modal");
 $(document).ready(function() {
+  // handler for new user modal submit button
   signUpSubmit.on("click", function(e) {
     e.preventDefault();
     var userData = {
@@ -22,11 +23,18 @@ $(document).ready(function() {
       name: signUpName.val().trim(),
       image: signUpImgurl.val().trim()
     };
-    console.log(userData);
     $.post("/api/sign-up", userData).then(function(data) {
       console.log(data);
+      $.post("/api/log-in", {
+        userName: data.userName,
+        password: userData.password
+      }).then(function(data) {
+        console.log(data);
+        window.location.replace(data);
+      });
     });
   });
+  // handler for login modal submit button
   logInSubmit.on("click", function(e) {
     e.preventDefault();
     $.post("/api/log-in", {
