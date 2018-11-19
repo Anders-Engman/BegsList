@@ -134,7 +134,7 @@ $(document).ready(function() {
     // Make POST using the User's ID (temp Dr. Spaceman), the Item's ID, and the buttons value (1 or -1)
     $.ajax({
       method: "POST",
-      url: "api/votes/",
+      url: "/api/votes/",
       data: {
         voteValue: $(this).data("val"),
         ItemId: $(this).data("id"),
@@ -142,7 +142,7 @@ $(document).ready(function() {
       }
     }).then(function(response) {
       event.preventDefault();
-      console.log("Anything?");
+
       console.log(response);
     });
   });

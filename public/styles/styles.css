@@ -319,8 +319,12 @@ footer {
 
 /* ==== Single Item Template View ==== */
 
-.itemSingle {
+.itemSingle,
+#userItems {
   color: #707070;
+}
+
+.itemSingle {
   margin-bottom: 56px;
 }
 
@@ -356,6 +360,10 @@ footer {
   margin-bottom: 4px;
 }
 
+.itemSingle__imageContainer img {
+  min-width: 100%;
+}
+
 .itemSingle__buttonsContainer {
   margin-top: 24px;
 }
@@ -388,4 +396,52 @@ footer {
 
 .itemSingle__arrows .up-down {
   padding-left: 2px;
+}
+
+/* ==== Single User Template View ==== */
+.userSingle__userDetails h2 {
+  display: inline-block;
+  font-family: "Bentham", serif;
+  padding: 12px 24px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+}
+
+.userSingle__userDetails p {
+  padding: 24px;
+  margin-bottom: 0;
+}
+
+.userSingle__begScore h3,
+#userItems h2 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.userBegScore {
+  color: hsla(62, 87%, 45%, 0.8);
+  font-size: 32px;
+}
+
+#userItems h2 {
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.userSingle__item {
+  margin-bottom: 24px;
+}
+.userSingle__item img {
+  border: 1px solid #707070;
+  max-height: 104px;
+  height: auto;
+}
+
+.userSingle__itemContainer {
+  flex: 1 0 auto;
+  margin-left: 24px;
+}
+
+.userSingle__votesCount {
+  display: inline-block;
+  margin-left: 8px;
 }
