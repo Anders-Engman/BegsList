@@ -91,6 +91,7 @@ module.exports = function(app) {
   });
   // Load homepage
   app.get("/", isAuthenticated, function(req, res) {
+    console.log(process.env.EBAY_APIKEY);
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],

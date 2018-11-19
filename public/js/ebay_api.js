@@ -6,7 +6,7 @@ $(document).ready(function() {
   //ebay Merchandising API: https://developer.ebay.com/Devzone/merchandising/docs/CallRef/getSimilarItems.html#Samples
   //Solve the XMLhttpRequest issue: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe
 
-  var appId = "CindyLam-beglist-PRD-fc22b8256-230a68e2";
+  var appId = process.env.EBAY_APIKEY;
   var itemName = "jeans";
   var itemId = "113214328944";
 
