@@ -127,15 +127,15 @@ module.exports = function(app) {
       name: name
     };
 
+    console.log(userData);
+
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [
-        { model: db.Item, include: [{ model: db.User }, { model: db.Vote }] }
-      ],
+      include: [{ model: db.Item, include: [{ model: db.User }] }],
       logging: sqlLogger
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
