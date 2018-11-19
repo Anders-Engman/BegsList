@@ -103,6 +103,7 @@ module.exports = function(app) {
       last_login: last_login,
       name: name
     };
+
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
@@ -116,6 +117,7 @@ module.exports = function(app) {
       insertItemColorVal(dbItems);
       res.render("index", {
         items: dbItems,
+
         user: userData
       });
     });
