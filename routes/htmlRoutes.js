@@ -91,7 +91,19 @@ module.exports = function(app) {
   });
   // Load homepage
   app.get("/", isAuthenticated, function(req, res) {
-    console.log(req.user.name);
+    // object destructuring: this miracle syntax allows you to ref
+    // "userName" as if you were referencing "req.user.userName";
+    // saves keystrokes.
+    var { userName, bio, image, begScore, last_login, name } = req.user;
+    var userData = {
+      userName: userName,
+      bio: bio,
+      image: image,
+      begScore: begScore,
+      last_login: last_login,
+      name: name
+    };
+
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
@@ -105,7 +117,8 @@ module.exports = function(app) {
       insertItemColorVal(dbItems);
       res.render("index", {
         items: dbItems,
-        user: req.user
+
+        user: userData
       });
     });
   });
