@@ -64,8 +64,6 @@ module.exports = function(app) {
       name: name
     };
 
-    // console.log(userData.id);
-
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
@@ -78,10 +76,11 @@ module.exports = function(app) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
       db.Vote.findAll({
-        where: { UserId: userData.id }
+        where: { UserId: req.user.id }
       }).then(function(userVotes) {
         res.render("index", {
           items: dbItems,
+          user: req.user,
           userInfo: userVotes,
           helpers: {
             plusMinusVoteCount: plusMinusVoteCount,
@@ -92,13 +91,17 @@ module.exports = function(app) {
     });
   });
 
-  //load items page (Beg input and suggested items list)
+  //Load search items page (Beg input and suggested items list)
   app.get("/items", function(req, res) {
-    res.render("items");
+    res.render("items", {
+      user: req.user
+    });
   });
 
   app.get("/test-modal", function(req, res) {
-    res.render("test");
+    res.render("test", {
+      user: req.user
+    });
   });
 
   // Load Item Template - pass db Item via ItemId
@@ -109,6 +112,7 @@ module.exports = function(app) {
     }).then(function(dbItem) {
       res.render("item-single", {
         item: dbItem,
+        user: req.user,
         helpers: {
           plusMinusVoteCount: plusMinusVoteCount,
           applySelected: applySelected
@@ -119,17 +123,6 @@ module.exports = function(app) {
 
   // Load User Template - pass db Item via ItemId
   app.get("/user/:id", function(req, res) {
-    var { id, userName, bio, image, begScore, last_login, name } = req.user;
-    var userData = {
-      id: id,
-      userName: userName,
-      bio: bio,
-      image: image,
-      begScore: begScore,
-      last_login: last_login,
-      name: name
-    };
-
     db.User.findAll({
       where: {
         id: req.params.id
@@ -137,7 +130,8 @@ module.exports = function(app) {
       include: [{ model: db.Item, include: { model: db.Vote } }]
     }).then(function(dbUser) {
       res.render("user-single", {
-        user: dbUser,
+        userView: dbUser,
+        user: req.user,
         helpers: {
           plusMinusVoteCount: plusMinusVoteCount,
           applySelected: applySelected
