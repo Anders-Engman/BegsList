@@ -1,7 +1,5 @@
 <div class="layout__items-list row">
   {{#each items}}
-  {{!-- {{log '***********************************************'}}
-  {{log this.Item.Vote}} --}}
   {{!-- Set the div's background color based on the item's Color object/Constructor --}}
   <div data-id="{{this.Item.id}}" class="layout__item col-12 d-flex" style="background-color: hsla({{this.Color.hue}}, {{this.Color.saturation}}%, {{this.Color.lightness}}%, 0.35)">
     <a href="items/{{this.Item.id}}" class="mr-auto">

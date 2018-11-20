@@ -7,8 +7,8 @@ var signUpSubmit = $(".signup-form-submit");
 var logInUsername = $(".login-form-username");
 var logInPassword = $(".login-form-password");
 var logInSubmit = $(".login-form-submit");
-var signUpLink = $(".signup-button");
-var logInLink = $(".login-button");
+// var signUpLink = $(".signup-button");
+// var logInLink = $(".login-button");
 var modalObscure = $(".modal-obscure");
 var loginModal = $(".layout__login-modal");
 var signUpModal = $(".layout__signup-modal");
@@ -49,17 +49,17 @@ $(document).ready(function() {
         console.log(err);
       });
   });
-  signUpLink.on("click", function(e) {
-    e.preventDefault();
-    modalObscure.css("display", "grid");
-    signUpModal.css("display", "block");
-  });
+  // signUpLink.on("click", function(e) {
+  //   e.preventDefault();
+  //   modalObscure.css("display", "grid");
+  //   signUpModal.css("display", "block");
+  // });
 
-  logInLink.on("click", function(e) {
-    e.preventDefault();
-    modalObscure.css("display", "grid");
-    loginModal.css("display", "block");
-  });
+  // logInLink.on("click", function(e) {
+  //   e.preventDefault();
+  //   modalObscure.css("display", "grid");
+  //   loginModal.css("display", "block");
+  // });
   $(window).keydown(function(e) {
     if (e.keyCode === 27) {
       console.log("Excape!");
