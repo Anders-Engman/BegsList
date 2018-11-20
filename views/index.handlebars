@@ -1,5 +1,4 @@
-<div class="layout__items-list row">
-  {{!-- {{log userInfo}} --}}
+<div class="layout__main-container row" data-user-id="{{user.id}}">
   {{#each items}}
   {{!-- Set the div's background color based on the item's Color object/Constructor --}}
   <div data-id="{{this.Item.id}}" class="layout__item col-12 d-flex" style="background-color: hsla({{this.Color.hue}}, {{this.Color.saturation}}%, {{this.Color.lightness}}%, 0.35)">

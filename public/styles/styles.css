@@ -145,11 +145,11 @@
   margin-top: 40px;
 }
 
-.layout__items-list {
+.layout__main-container {
   transition: margin 375ms ease-in-out;
 }
 
-.layout__items-list.active {
+.layout__main-container.active {
   margin-right: 8px;
   margin-left: 8px;
 }

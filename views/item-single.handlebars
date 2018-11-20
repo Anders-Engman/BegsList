@@ -1,5 +1,5 @@
 {{#each item}}
-<div class="itemSingle row">
+<div class="layout__main-container itemSingle row" data-user-id="{{../user.id}}">
     <div class="itemSingle__container col-xl-12 col-lg-10 col-lg-offset-1 col-12">
         <div class="row">
             <div class="itemSingle__details col-7">
@@ -26,9 +26,9 @@
                         <button href="#">Purchase</button>
                     </div>
                     <div class="itemSingle__arrows">
-                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
                                 class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
                                 class="far fa-arrow-alt-circle-down fa-lg"></i></a>
                         <div class="itemSingle__voteCount mt-2 text-center">
                             {{{plusMinusVoteCount this.Votes}}}
