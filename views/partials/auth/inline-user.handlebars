@@ -4,6 +4,7 @@ up --}}
     {{#if user}}
     Hello, {{user.name}}
     {{else}}
-    <a href="#" class="signup-button">Sign-up</a> / <a href="#" class="login-button">Log-in</a>
+    <a data-toggle="modal" data-target="#signUpModal" class="layout__signup-modal">Sign-up</a> / <a data-toggle="modal"
+        data-target="#loginModal" class="layout__login-modal">Log-in</a>
     {{/if}}
 </div>
