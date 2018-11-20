@@ -1,13 +1,14 @@
 var db = require("../models");
+var Handlebars = require("express-handlebars");
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // ==== Debugging Functions ==== //
 // Log Sequelize Statements as raw SQL
-function sqlLogger(msg) {
+sqlLogger = function(msg) {
   console.log("SQL Log:");
   console.log(msg);
-}
+};
 
 // Console log rank and color
 logRankAndColor = function(results) {
@@ -20,6 +21,28 @@ logRankAndColor = function(results) {
       results[i].dataValues.Color
     );
   }
+};
+
+// ==== Handlebars Helpers ==== //
+plusMinusVoteCount = function(VotesObj) {
+  var negativeVoteCount = 0;
+  var positiveVoteCount = 0;
+  for (var i = 0; i < VotesObj.length; i++) {
+    var currentVoteVal = VotesObj[i].voteValue;
+
+    if (currentVoteVal > 0) {
+      positiveVoteCount++;
+    } else {
+      negativeVoteCount++;
+    }
+  }
+  return (
+    '<span id="up-vote__count">' +
+    positiveVoteCount +
+    '</span> / <span id="down-vote__count">' +
+    negativeVoteCount +
+    "</span>"
+  );
 };
 
 // Creat Color Constructor to add to returned Sequelize Model
@@ -104,21 +127,24 @@ module.exports = function(app) {
       name: name
     };
 
+    console.log(userData);
+
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
+      include: [{ model: db.Item, include: [{ model: db.User }] }],
       logging: sqlLogger
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
       res.render("index", {
         items: dbItems,
-
-        user: userData
+        helpers: {
+          plusMinusVoteCount: plusMinusVoteCount
+        }
       });
     });
   });
@@ -140,12 +166,43 @@ module.exports = function(app) {
     // });
   });
 
-  // Load example page and pass in an example by id
-
+  // Load Item Template - pass db Item via ItemId
   app.get("/items/:id", function(req, res) {
-    db.Item.findAll({}).then(function(dbExample) {
+    db.Item.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: db.User
+        },
+        {
+          model: db.Vote
+        }
+      ]
+    }).then(function(dbItem) {
       res.render("item-single", {
-        example: dbExample
+        item: dbItem,
+        helpers: {
+          plusMinusVoteCount: plusMinusVoteCount
+        }
+      });
+    });
+  });
+
+  // Load User Template - pass db Item via ItemId
+  app.get("/user/:id", function(req, res) {
+    db.User.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [{ model: db.Item, include: { model: db.Vote } }]
+    }).then(function(dbUser) {
+      res.render("user-single", {
+        user: dbUser,
+        helpers: {
+          plusMinusVoteCount: plusMinusVoteCount
+        }
       });
     });
   });

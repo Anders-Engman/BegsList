@@ -57,7 +57,6 @@
 .layout__navbar {
   padding: 1.5rem 1rem;
   box-shadow: 0 3px 6px -3px rgba(0, 0, 0, 0.16);
-  z-index: 0;
 }
 
 .layout__navbar-nav .container {
@@ -316,4 +315,133 @@ footer {
   right: 0;
   background-color: rgba(0, 0, 0, 0.65);
   z-index: 1;
+}
+
+/* ==== Single Item Template View ==== */
+
+.itemSingle,
+#userItems {
+  color: #707070;
+}
+
+.itemSingle {
+  margin-bottom: 56px;
+}
+
+.itemSingle__itemDetails h2 {
+  font-family: "Open Sans", sans-serif;
+  padding: 12px 24px;
+  background-color: #eee;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+}
+
+.itemSingle__itemDetails p {
+  padding: 24px;
+  margin-bottom: 0;
+}
+
+.itemSingle__userDetails {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.itemSingle__userDetails img {
+  float: left;
+  max-width: 72px;
+}
+
+.itemSingle__userText {
+  float: left;
+  margin-left: 12px;
+}
+
+.itemSingle__userText h4 {
+  margin-bottom: 4px;
+}
+
+.itemSingle__imageContainer img {
+  min-width: 100%;
+}
+
+.itemSingle__buttonsContainer {
+  margin-top: 24px;
+}
+
+.itemSingle__purchase button {
+  display: block;
+  margin: auto;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 48px;
+  background-color: #16ad2d;
+  font-family: "Bentham", serif;
+  font-size: 20px;
+  color: #fff;
+}
+
+.itemSingle__arrows {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.itemSingle__arrows .up-vote,
+.itemSingle__arrows .down-vote {
+  font-size: 24px;
+}
+
+.itemSingle__arrows .up-vote {
+  padding-right: 2px;
+}
+
+.itemSingle__arrows .up-down {
+  padding-left: 2px;
+}
+
+/* ==== Single User Template View ==== */
+.userSingle__userDetails h2 {
+  display: inline-block;
+  font-family: "Bentham", serif;
+  padding: 12px 24px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
+}
+
+.userSingle__userDetails p {
+  padding: 24px;
+  margin-bottom: 0;
+}
+
+.userSingle__begScore h3,
+#userItems h2 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.userBegScore {
+  color: hsla(62, 87%, 45%, 0.8);
+  font-size: 32px;
+}
+
+#userItems h2 {
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.userSingle__item {
+  margin-bottom: 24px;
+}
+.userSingle__item img {
+  border: 1px solid #707070;
+  max-height: 104px;
+  height: auto;
+}
+
+.userSingle__itemContainer {
+  flex: 1 0 auto;
+  margin-left: 24px;
+}
+
+.userSingle__votesCount {
+  display: inline-block;
+  margin-left: 8px;
 }
