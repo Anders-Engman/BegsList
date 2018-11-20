@@ -28,18 +28,42 @@ $(document).ready(function() {
         console.log(voteValue);
         console.log(response.voteValue);
         if (Number.parseInt(response.voteValue) > 0) {
-          $(".layout__vote-content [data-id=" + response.ItemId + "]").addClass(
-            "selected-up-vote"
-          );
           $(
-            ".layout__vote-content [data-id=" + response.ItemId + "]"
+            ".layout__vote-content [data-id=" +
+              response.ItemId +
+              "], .itemSingle__arrows [data-id=" +
+              response.ItemId +
+              "], .userSingle__arrows [data-id=" +
+              response.ItemId +
+              "]"
+          ).addClass("selected-up-vote");
+          $(
+            ".layout__vote-content [data-id=" +
+              response.ItemId +
+              "], .itemSingle__arrows [data-id=" +
+              response.ItemId +
+              "], .userSingle__arrows [data-id=" +
+              response.ItemId +
+              "]"
           ).removeClass("selected-down-vote");
         } else {
-          $(".layout__vote-content [data-id=" + response.ItemId + "]").addClass(
-            "selected-down-vote"
-          );
           $(
-            ".layout__vote-content [data-id=" + response.ItemId + "]"
+            ".layout__vote-content [data-id=" +
+              response.ItemId +
+              "], .itemSingle__arrows [data-id=" +
+              response.ItemId +
+              "], .userSingle__arrows [data-id=" +
+              response.ItemId +
+              "]"
+          ).addClass("selected-down-vote");
+          $(
+            ".layout__vote-content [data-id=" +
+              response.ItemId +
+              "], .itemSingle__arrows [data-id=" +
+              response.ItemId +
+              "], .iuserSingle__arrows [data-id=" +
+              response.ItemId +
+              "]"
           ).removeClass("selected-up-vote");
         }
       });
