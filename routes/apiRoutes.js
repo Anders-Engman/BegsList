@@ -33,11 +33,14 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  //GET Similar Search Items
-  app.post("/api/searchItems", function(req, res) {
+  //POST route for Similar Search Items 
+  app.post("/api/searchItems", function (req, res) {
+
     var appId = process.env.EBAY_APIKEY;
     var itemName = req.body.name;
+    var page = parseInt(req.body.page);
 
+    //Using Finding Ebay API to get the itemID
     var query_Finding_URL =
       "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=" +
       appId +
@@ -45,33 +48,32 @@ module.exports = function(app) {
       itemName +
       "&paginationInput.entriesPerPage=1";
 
-    request(query_Finding_URL, function(error, response, body) {
+    request(query_Finding_URL, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        // console.log(
-        //   JSON.parse(body).findItemsAdvancedResponse[0].searchResult[0].item
-        // );
 
-        var newItemId = JSON.parse(body).findItemsAdvancedResponse[0]
-          .searchResult[0].item[0].itemId;
+        var newItemId = JSON.parse(body).findItemsAdvancedResponse[0].searchResult[0].item[0].itemId;
+        var resultNumber = 8 * page;
 
+        //Use the ItemID to apply in Merchandising Ebay getSimilarItems API
         var query_Similar_URL =
           "http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=" +
           appId +
           "&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=" +
           newItemId +
-          "&maxResults=24";
+          "&maxResults=" + resultNumber;
 
-        request(query_Similar_URL, function(error, response, body) {
+        request(query_Similar_URL, function (error, response, body) {
           if (!error && response.statusCode === 200) {
-            // console.log(
-            //   JSON.parse(body).getSimilarItemsResponse.itemRecommendations.item
-            // );
 
-            var itemList = JSON.parse(body).getSimilarItemsResponse
-              .itemRecommendations.item;
+            var itemList = JSON.parse(body).getSimilarItemsResponse.itemRecommendations.item;
+
             var similarItemsObj = [];
 
-            for (var i = 0; i < itemList.length; i++) {
+            //offset logic for 'show more' items search results loading
+            var i;
+            i = (page - 1) * 8;
+
+            for (i; i < itemList.length; i++) {
               similarItemsObj.push({
                 itemId: itemList[i].itemId,
                 title: itemList[i].title,
@@ -81,8 +83,11 @@ module.exports = function(app) {
               });
             }
             res.json(similarItemsObj);
+
+
           }
         });
+
       }
     });
   });
