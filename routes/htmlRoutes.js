@@ -37,8 +37,8 @@ module.exports = function(app) {
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
-      logging: sqlLogger
+      include: [{ model: db.Item, include: { model: db.User } }]
+      // logging: sqlLogger
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
@@ -49,45 +49,63 @@ module.exports = function(app) {
   });
 
   // Load homepage
-  app.get("/", isAuthenticated, function(req, res) {
+  app.get("/", function(req, res) {
     // object destructuring: this miracle syntax allows you to ref
     // "userName" as if you were referencing "req.user.userName";
     // saves keystrokes.
-    var { id, userName, bio, image, begScore, last_login, name } = req.user;
-    var userData = {
-      id: id,
-      userName: userName,
-      bio: bio,
-      image: image,
-      begScore: begScore,
-      last_login: last_login,
-      name: name
-    };
+    // var { id, userName, bio, image, begScore, last_login, name } = req.user;
+    // var userData = {
+    //   id: id,
+    //   userName: userName,
+    //   bio: bio,
+    //   image: image,
+    //   begScore: begScore,
+    //   last_login: last_login,
+    //   name: name
+    // };
 
+    console.log(req.user);
+
+    //On homepage load, find the SUM of every ItemId's voteValue, sequelize returns this data by ItemId ascending
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: [{ model: db.User }] }],
-      logging: sqlLogger
+      include: [{ model: db.Item, include: [{ model: db.User }] }]
     }).then(function(dbItems) {
+      // Sort Items by itemScore from High to Low (located in /config/middleware/voteSortLogic)
       sortByItemScoreSum(dbItems);
+
+      //Apply Color Property to the Item in relation to topColor/bottomColor and position on list (located in /config/middleware/gradientSort)
       insertItemColorVal(dbItems);
-      db.Vote.findAll({
-        where: { UserId: req.user.id }
-      }).then(function(userVotes) {
+
+      // If the user is defined, find the User's Vote history and then render the index template, else skip querying the vote history and render index
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("index", {
+            items: dbItems,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
         res.render("index", {
           items: dbItems,
           user: req.user,
-          userInfo: userVotes,
           helpers: {
             plusMinusVoteCount: plusMinusVoteCount,
             applySelected: applySelected
           }
         });
-      });
+      }
     });
   });
 
@@ -106,37 +124,71 @@ module.exports = function(app) {
 
   // Load Item Template - pass db Item via ItemId
   app.get("/items/:id", function(req, res) {
+    console.log(req.user);
     db.Item.findAll({
       where: { id: req.params.id },
       include: [{ model: db.User }, { model: db.Vote }]
     }).then(function(dbItem) {
-      res.render("item-single", {
-        item: dbItem,
-        user: req.user,
-        helpers: {
-          plusMinusVoteCount: plusMinusVoteCount,
-          applySelected: applySelected
-        }
-      });
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("item-single", {
+            item: dbItem,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
+        res.render("item-single", {
+          item: dbItem,
+          user: req.user,
+          helpers: {
+            plusMinusVoteCount: plusMinusVoteCount,
+            applySelected: applySelected
+          }
+        });
+      }
     });
   });
 
   // Load User Template - pass db Item via ItemId
   app.get("/user/:id", function(req, res) {
+    console.log(req.user);
     db.User.findAll({
       where: {
         id: req.params.id
       },
       include: [{ model: db.Item, include: { model: db.Vote } }]
     }).then(function(dbUser) {
-      res.render("user-single", {
-        userView: dbUser,
-        user: req.user,
-        helpers: {
-          plusMinusVoteCount: plusMinusVoteCount,
-          applySelected: applySelected
-        }
-      });
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("user-single", {
+            userView: dbUser,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
+        res.render("user-single", {
+          userView: dbUser,
+          user: req.user,
+          helpers: {
+            plusMinusVoteCount: plusMinusVoteCount,
+            applySelected: applySelected
+          }
+        });
+      }
     });
   });
 
