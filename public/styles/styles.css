@@ -248,12 +248,12 @@ a:hover {
 }
 
 .up-vote:hover,
-.up-vote.selected {
+.up-vote.selected-up-vote {
   color: hsl(130, 87%, 45%);
 }
 
 .down-vote:hover,
-.down-vote.selected {
+.down-vote.selected-down-vote {
   color: hsl(10, 87%, 45%);
 }
 

@@ -26,8 +26,10 @@
                         <button href="#">Purchase</button>
                     </div>
                     <div class="itemSingle__arrows">
-                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote"><i class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote"><i class="far fa-arrow-alt-circle-down fa-lg"></i></a>
+                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                                class="far fa-arrow-alt-circle-up fa-lg"></i></a>
+                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                                class="far fa-arrow-alt-circle-down fa-lg"></i></a>
                         <div class="itemSingle__voteCount mt-2 text-center">
                             {{{plusMinusVoteCount this.Votes}}}
                         </div>
