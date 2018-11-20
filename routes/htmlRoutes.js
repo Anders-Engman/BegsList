@@ -37,8 +37,8 @@ module.exports = function(app) {
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
-      logging: sqlLogger
+      include: [{ model: db.Item, include: { model: db.User } }]
+      // logging: sqlLogger
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
       insertItemColorVal(dbItems);
@@ -64,17 +64,38 @@ module.exports = function(app) {
       name: name
     };
 
+    //On homepage load, find the SUM of every ItemId's voteValue, sequelize returns this data by ItemId ascending
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: [{ model: db.User }] }],
-      logging: sqlLogger
+      include: [{ model: db.Item, include: [{ model: db.User }] }]
+      // logging: sqlLogger
     }).then(function(dbItems) {
+      // Sort Items by itemScore from High to Low (located in /config/middleware/voteSortLogic)
       sortByItemScoreSum(dbItems);
+
+      //Apply Color Property to the Item in relation to topColor/bottomColor and position on list (located in /config/middleware/gradientSort)
       insertItemColorVal(dbItems);
+
+      // If the user if logged in find the User's Vote history
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("index", {
+            items: dbItems,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      }
       db.Vote.findAll({
         where: { UserId: req.user.id }
       }).then(function(userVotes) {

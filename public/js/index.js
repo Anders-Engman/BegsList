@@ -1,12 +1,7 @@
 // Beg's List Client Side Javascipt Vote Code
 $(document).ready(function() {
-  $("#sidebarToggle").on("click", function() {
-    $(
-      ".layout__side-bar, .layout__main, .layout__items-list, .menu"
-    ).toggleClass("active");
-  });
-
-  $("#collapseToggle").on("click", function() {
+  // When hamburger or 'Collapse <-' buttons are pushed, toggle '.active' class to key divs to create expanded/collapsed sidebar
+  $("#sidebarToggle, #collapseToggle").on("click", function() {
     $(
       ".layout__side-bar, .layout__main, .layout__items-list, .menu"
     ).toggleClass("active");
@@ -17,8 +12,10 @@ $(document).ready(function() {
     //MUST CREATE a new user, use this section to input their User ID to test
     var testUserId = 12;
 
+    //Prevent href="#" reload
+    event.preventDefault();
+
     //Toggle Button's Selected Class
-    $(this).toggleClass("selected");
 
     // Make POST using the User's ID (temp Dr. Spaceman), the Item's ID, and the buttons value (1 or -1)
     $.ajax({
@@ -30,8 +27,6 @@ $(document).ready(function() {
         UserId: testUserId
       }
     }).then(function(response) {
-      event.preventDefault();
-
       console.log(response);
     });
   });

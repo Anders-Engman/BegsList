@@ -1,18 +1,39 @@
 {{!-- a modal that will collect basic info from the user and allow them to sign up for begslist --}}
-
-<div class="layout__signup-modal">
-    <form class="signup-form">
-        <label class="form-label" for="username">Username</label>
-        <input name="username" type="text" class="form-item signup-form-username">
-        <label class="form-label" for="password">Password</label>
-        <input name="password" type="text" class="form-item signup-form-password">
-        <label class="form-label" for="bio">Bio</label>
-        <textarea name="bio" class="form-item signup-form-bio"></textarea>
-        <label class="form-label" for="realname">Name</label>
-        <input name="realname" type="text" class="form-item signup-form-name">
-        <label class="form-label" for="imgurl">Img URL</label>
-        <input name="imgurl" type="text" class="form-item signup-form-imgurl">
-        <input name="submit" type="submit" class="form-item signup-form-submit">
-    </form>
-
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sign Up for Beg's List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <form class="signup-form">
+                        <label class="form-label" for="username">Username</label>
+                        <input name="username" type="text" class="form-item signup-form-username">
+                        <label class="form-label" for="password">Password</label>
+                        <input name="password" type="password" class="form-item signup-form-password">
+                        <label class="form-label" for="bio">Bio</label>
+                        <textarea name="bio" class="form-item signup-form-bio"></textarea>
+                        <label class="form-label" for="realname">Name</label>
+                        <input name="realname" type="text" class="form-item signup-form-name">
+                        <label class="form-label" for="imgurl">Img URL</label>
+                        <input name="imgurl" type="text" class="form-item signup-form-imgurl">
+                        <input name="submit" type="submit" class="form-item signup-form-submit">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
