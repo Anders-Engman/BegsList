@@ -1,4 +1,5 @@
 <div class="layout__items-list row">
+  {{!-- {{log userInfo}} --}}
   {{#each items}}
   {{!-- {{log '***********************************************'}}
   {{log this.Item.Vote}} --}}
@@ -12,9 +13,10 @@
     </a>
     <div class="layout__vote-container">
       <div class="layout__vote-content">
-        <a href="#" data-id="{{this.Item.id}}" data-val="1" class="up-vote"><i class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-        <a href="#" data-id="{{this.Item.id}}" data-val="-1" class="down-vote"><i class="far fa-arrow-alt-circle-down fa-lg"></i></a>
-        {{!-- {{{plusMinusVoteCount}}} --}}
+        <a href="#" data-id="{{this.Item.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+            class="far fa-arrow-alt-circle-up fa-lg"></i></a>
+        <a href="#" data-id="{{this.Item.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+            class="far fa-arrow-alt-circle-down fa-lg"></i></a>
       </div>
     </div>
   </div>
