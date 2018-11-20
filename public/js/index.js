@@ -14,8 +14,8 @@ $(document).ready(function() {
 
   // Post Vote
   $(".up-vote, .down-vote").on("click", function(event) {
-    //Dr. Spaceman User Id
-    var testUserId = 13;
+    //MUST CREATE a new user, use this section to input their User ID to test
+    var testUserId = 12;
 
     //Toggle Button's Selected Class
     $(this).toggleClass("selected");
