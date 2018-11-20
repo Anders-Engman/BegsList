@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     image: {
-      type: DataTypes.BLOB,
+      type: DataTypes.BLOB("medium"),
       allowNull: true
     },
     begScore: {

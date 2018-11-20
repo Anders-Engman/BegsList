@@ -21,15 +21,22 @@ $(document).ready(function() {
       password: signUpPassword.val().trim(),
       bio: signUpBio.val().trim(),
       name: signUpName.val().trim(),
-      image: signUpImgurl.val().trim()
+      image: signUpImgurl[0].files[0]
     };
-    $.post("/api/sign-up", userData).then(function(data) {
+    console.log(userData);
+    $.ajax({
+      url: "/api/sign-up",
+      method: "POST",
+      data: userData,
+      processData: false,
+      contentType: false
+    }).then(function(data) {
       console.log(data);
       $.post("/api/log-in", {
         userName: data.userName,
         password: userData.password
       }).then(function(data) {
-        console.log(data);
+        console.log("babies: " + data);
         window.location.replace(data);
       });
     });

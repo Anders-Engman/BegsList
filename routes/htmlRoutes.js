@@ -72,6 +72,38 @@ insertItemColorVal = function(results) {
 };
 
 module.exports = function(app) {
+  // Load homepage
+  app.get("/", isAuthenticated, function(req, res) {
+    // object destructuring: this miracle syntax allows you to ref
+    // "userName" as if you were referencing "req.user.userName";
+    // saves keystrokes.
+    var { userName, bio, image, begScore, last_login, name } = req.user;
+    var userData = {
+      userName: userName,
+      bio: bio,
+      image: image,
+      begScore: begScore,
+      last_login: last_login,
+      name: name
+    };
+    console.log(userData.image);
+    db.Vote.findAll({
+      attributes: [
+        [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
+        "ItemId"
+      ],
+      group: ["ItemId"],
+      include: [{ model: db.Item, include: { model: db.User } }],
+      logging: sqlLogger
+    }).then(function(dbItems) {
+      sortByItemScoreSum(dbItems);
+      insertItemColorVal(dbItems);
+      res.render("index", {
+        items: dbItems,
+        user: userData
+      });
+    });
+  });
   app.get("/unauth", function(req, res) {
     db.Vote.findAll({
       attributes: [
@@ -89,59 +121,13 @@ module.exports = function(app) {
       });
     });
   });
-  // Load homepage
-  app.get("/", isAuthenticated, function(req, res) {
-    // object destructuring: this miracle syntax allows you to ref
-    // "userName" as if you were referencing "req.user.userName";
-    // saves keystrokes.
-    var { userName, bio, image, begScore, last_login, name } = req.user;
-    var userData = {
-      userName: userName,
-      bio: bio,
-      image: image,
-      begScore: begScore,
-      last_login: last_login,
-      name: name
-    };
-
-    db.Vote.findAll({
-      attributes: [
-        [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
-        "ItemId"
-      ],
-      group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
-      logging: sqlLogger
-    }).then(function(dbItems) {
-      sortByItemScoreSum(dbItems);
-      insertItemColorVal(dbItems);
-      res.render("index", {
-        items: dbItems,
-
-        user: userData
-      });
-    });
-  });
-
   //load items page (Beg input and suggested items list)
   app.get("/items", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {
       res.render("items");
     });
   });
-
-  app.get("/test-modal", function(req, res) {
-    // db.User.findAll({}).then(function(dbItems) {
-    res.render("test", {
-      // msg: "Welcome!",
-      // examples: dbItems
-    });
-    // console.log(dbItems);
-    // });
-  });
-
   // Load example page and pass in an example by id
-
   app.get("/items/:id", function(req, res) {
     db.Item.findAll({}).then(function(dbExample) {
       res.render("item-single", {
