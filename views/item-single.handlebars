@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="itemSingle__imageContainer col-5">
-                <img src="{{this.itemURL}}" class="img-fluid">
+                <img src="{{this.imageURL}}" class="img-fluid">
                 <div class="itemSingle__buttonsContainer">
                     <div class="itemSingle__purchase">
-                        <button href="#">Purchase</button>
+                        <button href="{{this.itemURL}}">Purchase</button>
                     </div>
                     <div class="itemSingle__arrows">
                         <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
