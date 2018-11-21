@@ -15,7 +15,7 @@
                         <a href="/user/{{this.UserId}}">
                             <h4>{{this.User.name}}</h4>
                         </a>
-                        <div class="itemSingle__begScore">Begometer No.:<span class="itemSingle__userScore">{{this.User.begScore}}</span></div>
+                        <div class="itemSingle__begScore">Begometer No.: <span class="itemSingle__userScore">{{this.User.begScore}}</span></div>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,14 @@
     </div>
 </div>
 <div id="comments" class="layout__comments-section">
-    <h1>USER COMMENTS GO HERE</h1>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Comments</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <div class="itemSingle__buttonsContainer">
+                <div class="itemSingle__purchase">
+                    <button href="#">Purchase</button>
+                </div>
+            </div>
+    </div>
 </div>
 {{/each}}
