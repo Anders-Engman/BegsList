@@ -42,4 +42,4 @@ applySelected = function(currentItemID, userVotes) {
   }
 };
 
-module.exports = [plusMinusVoteCount, sortByItemScoreSum, applySelected];
+module.exports = [sortByItemScoreSum, plusMinusVoteCount, applySelected];

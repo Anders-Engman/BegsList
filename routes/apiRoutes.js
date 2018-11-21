@@ -33,9 +33,8 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  //POST route for Similar Search Items 
-  app.post("/api/searchItems", function (req, res) {
-
+  //POST route for Similar Search Items
+  app.post("/api/searchItems", function(req, res) {
     var appId = process.env.EBAY_APIKEY;
     var itemName = req.body.name;
     var page = parseInt(req.body.page);
@@ -48,10 +47,10 @@ module.exports = function(app) {
       itemName +
       "&paginationInput.entriesPerPage=1";
 
-    request(query_Finding_URL, function (error, response, body) {
+    request(query_Finding_URL, function(error, response, body) {
       if (!error && response.statusCode === 200) {
-
-        var newItemId = JSON.parse(body).findItemsAdvancedResponse[0].searchResult[0].item[0].itemId;
+        var newItemId = JSON.parse(body).findItemsAdvancedResponse[0]
+          .searchResult[0].item[0].itemId;
         var resultNumber = 8 * page;
 
         //Use the ItemID to apply in Merchandising Ebay getSimilarItems API
@@ -60,12 +59,13 @@ module.exports = function(app) {
           appId +
           "&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=" +
           newItemId +
-          "&maxResults=" + resultNumber;
+          "&maxResults=" +
+          resultNumber;
 
-        request(query_Similar_URL, function (error, response, body) {
+        request(query_Similar_URL, function(error, response, body) {
           if (!error && response.statusCode === 200) {
-
-            var itemList = JSON.parse(body).getSimilarItemsResponse.itemRecommendations.item;
+            var itemList = JSON.parse(body).getSimilarItemsResponse
+              .itemRecommendations.item;
 
             var similarItemsObj = [];
 
@@ -83,11 +83,8 @@ module.exports = function(app) {
               });
             }
             res.json(similarItemsObj);
-
-
           }
         });
-
       }
     });
   });
@@ -155,27 +152,30 @@ module.exports = function(app) {
           ItemId: req.body.ItemId,
           UserId: req.body.UserId
         }).then(vote => {
-          res.send({
-            newVote: true
-          });
+          res.json(vote);
         });
       }
       // If the Vote DOES exist,
       else {
         console.log("existing vote!");
         //check to see if the voteValue is equal
-        if (vote.voteValue !== req.body.voteValue) {
+        if (
+          Number.parseInt(vote.voteValue) !==
+          Number.parseInt(req.body.voteValue)
+        ) {
           db.Vote.destroy({
             where: {
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }
           }).then(vote => {
+            console.log("old vote deleted");
             db.Vote.create({
               voteValue: req.body.voteValue,
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }).then(vote => {
+              console.log("new vote created");
               res.json(vote);
             });
           });
@@ -187,6 +187,7 @@ module.exports = function(app) {
               UserId: req.body.UserId
             }
           }).then(vote => {
+            console.log("old vote deleted, no new one created");
             res.json(vote);
           });
         }
