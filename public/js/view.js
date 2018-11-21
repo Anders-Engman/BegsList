@@ -26,7 +26,7 @@ $(function () {
     }
 
     //Choose Button to choose a specific item 
-    $(document).on("click", "#choose-button", function (event) {
+    $(document).on("click", ".choose-button", function (event) {
         event.preventDefault();
         //FINISHED TODO: DISPLAY THE CHOSEN ITEM HERE 
         var title = $(this).attr("data-title");
@@ -138,15 +138,14 @@ $(function () {
                 //Image
                 var image = $("<img>");
                 image.attr("src", data[i].imageURL);
-                image.attr("style", "height:230px; weight: 380px");
+                image.attr("style", "height:230px");
                 //Price
                 var price = $("<p>");
                 price.text("US $" + data[i].price);
 
                 //Button to choose 
                 var chooseButton = $("<button>");
-                chooseButton.addClass("btn btn-info");
-                chooseButton.attr("id", "choose-button");
+                chooseButton.addClass("btn btn-info choose-button");
                 chooseButton.text("Choose");
                 chooseButton.attr("data-title", data[i].title);
                 chooseButton.attr("data-imageURL", data[i].imageURL);
