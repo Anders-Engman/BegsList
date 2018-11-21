@@ -95,7 +95,9 @@ module.exports = function(app) {
     db.Item.create({
       name: req.body.name,
       itemURL: req.body.itemURL,
-      reason: req.body.reason
+      reason: req.body.reason,
+      imageURL: req.body.imageURL,
+      UserId: req.user.id
     }).then(function(dbItem) {
       //console.log(dbItem);
       res.json(dbItem);
