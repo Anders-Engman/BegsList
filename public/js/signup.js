@@ -2,8 +2,8 @@ var signUpUsername = $(".signup-form-username");
 var signUpPassword = $(".signup-form-password");
 var signUpBio = $(".signup-form-bio");
 var signUpName = $(".signup-form-name");
-var signUpImgurl = $(".signup-form-imgurl");
-var signUpSubmit = $(".signup-form-submit");
+var signUpImgurl = $("#signup-form-imgurl");
+var signUpSubmit = $("#signup-form-submit");
 var logInUsername = $(".login-form-username");
 var logInPassword = $(".login-form-password");
 var logInSubmit = $(".login-form-submit");
@@ -21,18 +21,33 @@ $(document).ready(function() {
       password: signUpPassword.val().trim(),
       bio: signUpBio.val().trim(),
       name: signUpName.val().trim(),
-      image: signUpImgurl.val().trim()
+      image: signUpImgurl
     };
-    $.post("/api/sign-up", userData).then(function(data) {
+    console.log(userData.image[0].files[0]);
+    // $.post("/api/test-pics", userData.image[0].files[0]).then(function(data) {
+    //   console.log(data);
+    // });
+    $.ajax({
+      url: "/api/test-pics",
+      dataType: "text",
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: userData,
+      type: "post"
+    }).then(function(data) {
       console.log(data);
-      $.post("/api/log-in", {
-        userName: data.userName,
-        password: userData.password
-      }).then(function(data) {
-        console.log(data);
-        window.location.replace(data);
-      });
     });
+    // $.post("/api/sign-up", userData).then(function(data) {
+    //   console.log(data);
+    //   $.post("/api/log-in", {
+    //     userName: data.userName,
+    //     password: userData.password
+    //   }).then(function(data) {
+    //     console.log(data);
+    //     window.location.replace(data);
+    //   });
+    // });
   });
   // handler for login modal submit button
   logInSubmit.on("click", function(e) {

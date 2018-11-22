@@ -88,7 +88,10 @@ module.exports = function(app) {
       }
     });
   });
-
+  app.post("/api/test-pics", function(req, res) {
+    console.log(req);
+    res.send("hey!");
+  });
   //POST route for a new item
   app.post("/api/items", function(req, res) {
     console.log(req.body);
