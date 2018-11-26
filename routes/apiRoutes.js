@@ -33,6 +33,7 @@ module.exports = function(app) {
   app.post("/api/upload", function(req, res) {
     var form = new formidabel.IncomingForm();
     form.uploadDir = "./tmp";
+    form.keepExtensions = true;
     form.parse(req, function(err, fields, files) {
       res.writeHead(200, { "content-type": "text/plain" });
       res.write("received upload:\n\n");
