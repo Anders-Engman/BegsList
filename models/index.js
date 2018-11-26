@@ -39,8 +39,8 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.user = require("./user.js")(sequelize, Sequelize);
-// db.item = require("./item.js")(sequelize, Sequelize);
+// db.User = require("./user.js")(sequelize, Sequelize);
+// db.Item = require("./item.js")(sequelize, Sequelize);
 // db.comment = require("./comment.js")(sequelize, Sequelize);
 // db.vote = require("./vote.js")(sequelize, Sequelize);
 
@@ -50,9 +50,9 @@ db.Sequelize = Sequelize;
 // db.user.hasMany(db.comment);
 
 // An item belongs to a user, has many comments, has many votes
-// db.item.belongsTo(db.user);
+// db.Item.belongsTo(db.User);
 // db.item.hasMany(db.comment);
-// db.item.hasMany(db.vote);
+// db.Item.hasMany(db.Vote);
 
 // A comment can belong to an item and to a user
 // db.comment.belongsTo(db.item);

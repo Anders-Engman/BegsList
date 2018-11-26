@@ -2,6 +2,8 @@ var db = require("../models");
 var passport = require("../config/passport");
 require("dotenv").config();
 var request = require("request");
+var formidabel = require("formidable");
+var util = require("util");
 
 module.exports = function(app) {
   app.post("/api/sign-up", function(req, res) {
@@ -25,6 +27,16 @@ module.exports = function(app) {
     db.Item.findAll({}).then(function(dbItem) {
       res.json(dbItem);
       console.log(dbItem);
+    });
+  });
+
+  app.post("/api/upload", function(req, res) {
+    var form = new formidabel.IncomingForm();
+    form.uploadDir = "./tmp";
+    form.parse(req, function(err, fields, files) {
+      res.writeHead(200, { "content-type": "text/plain" });
+      res.write("received upload:\n\n");
+      res.end(util.inspect({ fields: fields, files: files }));
     });
   });
 
@@ -99,11 +111,10 @@ module.exports = function(app) {
       imageURL: req.body.imageURL,
       UserId: req.user.id
     }).then(function(dbItem) {
-      
-      //When a new chosen item is selected, 
+      //When a new chosen item is selected,
       //a upVote value is added to the Vote table
-      //for displaying purpose 
-      //(if no vote value, then no item will be displayed 
+      //for displaying purpose
+      //(if no vote value, then no item will be displayed
       //-- See htmlRoutes for the logic!)
       db.Vote.create({
         voteValue: 1,
