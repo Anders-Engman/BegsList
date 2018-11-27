@@ -1,62 +1,52 @@
-<br>
-
-<div class="container">
-    <div class="row">
-        <div class="col-6">
+<div class="bg-img-search mt-0" id="sliding-Search">
+    <div class="row mt-2">
+        <div class="col-12 text-center mt-5 pt-3">
             <h1> Ask the Universe for an Item</h1>
-            <div class="card">
-                <div class="card-header">
-                    Your Chosen Item
-                </div>
-                <div class="card-body">
-                    <div id="chosen-item-div" class="text-center m-auto" style="width: 380px">
-                        {{!-- FINISHED TODO: DISPLAY THE CHOSEN ITEM HERE --}}
+            <div>
+                <br>
+                <form id="item-form">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="new-item-input form-control w-50 mx-auto my-0" placeholder="Search An Item"
+                                    type="text" />
+                            </div>
+                        </div>
+                        <br>
+                        {{!-- TODO: Read Item Url --}}
+                        {{!-- <div class="row">
+                            <div class="col-10">
+                                <input class="form-control" type="url" value="https://getbootstrap.com" id="url-input">
+                            </div>
+                        </div> --}}
+                        {{!-- Old-Textarea and Submit button --}}
+                        {{!-- <div class="row">
+                            <div class="col-10">
+                                <textarea class="form-control" id="reason-textarea" rows="10" placeholder="Add a Reason(s) Why You Need This Item"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row text-center">
+                            <div class="col-10">
+                                <button type="submit" class="btn btn-success">Submit (into Database)</button>
+                            </div>
+                        </div> --}}
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-5">
-            <br>
-            <form id="item-form">
-                <div class="container">
+
                     <div class="row">
-                        <div class="col-10">
-                            <input class="new-item-input form-control" placeholder="Search An Item" type="text" />
-                        </div>
-                        <div class="col-2">
-                            <button id="find-items" type="submit" class="btn btn-danger">Search</button>
+                        <div class="col-12">
+                            <button id="find-items" type="submit" class="btn btn-primary slidingUp-Search">Search</button>
                         </div>
                     </div>
-                    <br>
-                    {{!-- TODO: Read Item Url --}}
-                    {{!-- <div class="row">
-                        <div class="col-10">
-                            <input class="form-control" type="url" value="https://getbootstrap.com" id="url-input">
-                        </div>
-                    </div> --}}
-                    {{!-- Old-Textarea and Submit button --}}
-                    {{!-- <div class="row">
-                        <div class="col-10">
-                            <textarea class="form-control" id="reason-textarea" rows="10" placeholder="Add a Reason(s) Why You Need This Item"></textarea>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row text-center">
-                        <div class="col-10">
-                            <button type="submit" class="btn btn-success">Submit (into Database)</button>
-                        </div>
-                    </div> --}}
-                </div>
 
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
 </div>
 
-</div>
-
-<div class="container mt-5">
+<div class="container mt-5" id="sliding-SearchItems" style="display:none">
     <div class="card">
         <div class="card-header">
             Your Search Items
@@ -69,6 +59,17 @@
     </div>
 
 </div>
+
+<div>
+    <div class="container mt-5 mb-5 clearfix" id="chosenItem" style="display:none">
+        <h2 class="mb-5">Your Chosen Item</h2>
+        <div class="row" id="chosen-item-div" class="m-auto">
+            
+        </div>
+
+    </div>
+</div>
+
 
 
 
