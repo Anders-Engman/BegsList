@@ -66,6 +66,7 @@ $(document).ready(function() {
               "]"
           ).removeClass("selected-up-vote");
         }
+        location.reload();
       });
     } else {
       $("#loginModal").modal("show");
