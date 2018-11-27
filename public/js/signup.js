@@ -3,7 +3,7 @@ var signUpPassword = $(".signup-form-password");
 var signUpBio = $(".signup-form-bio");
 var signUpName = $(".signup-form-name");
 var signUpImgurl = $("#signup-form-imgurl");
-var signUpSubmit = $(".signup-form-submit");
+var signUpSubmit = $("#signup-form-submit");
 var logInUsername = $(".login-form-username");
 var logInPassword = $(".login-form-password");
 var logInSubmit = $(".login-form-submit");
@@ -13,36 +13,41 @@ var modalObscure = $(".modal-obscure");
 var loginModal = $(".layout__login-modal");
 var signUpModal = $(".layout__signup-modal");
 $(document).ready(function() {
-  // handler for new user modal submit button
+  var newUserImageUrl = "";
   signUpSubmit.on("click", function(e) {
     e.preventDefault();
+    // TODO client side input validation
+    var newUserData = new FormData();
+    newUserData.append("userName", signUpUsername.val().trim());
+    newUserData.append("password", signUpPassword.val().trim());
+    newUserData.append("bio", signUpBio.val().trim());
+    newUserData.append("name", signUpName.val().trim());
+    newUserData.append("imageURL", signUpUsername.val().trim());
+  });
+  // handler for new user modal submit button
+  signUpImgurl.on("change", function(e) {
+    e.preventDefault();
+    signUpSubmit.addClass("disabled");
     console.log(signUpImgurl[0].files[0]);
-    var userData = new FormData();
-    userData.append("file", signUpImgurl[0].files[0]);
-    // var tmpdat = {
-    //   userName: signUpUsername.val().trim(),
-    //   password: signUpPassword.val().trim(),
-    //   bio: signUpBio.val().trim(),
-    //   name: signUpName.val().trim(),
-    //   image: signUpImgurl
-    // };
+    var newUserPic = new FormData();
+    newUserPic.append("file", signUpImgurl[0].files[0]);
     $.ajax({
       url: "/api/upload",
       method: "post",
-      data: userData,
+      data: newUserPic,
       // async: false,
       // cache: false,
       contentType: false,
       processData: false,
-      success: function() {
-        alert("Form Submitted!");
+      success: function(response) {
+        console.log(response.file);
+        signUpSubmit.removeClass("disabled");
       },
       error: function() {
         alert("error in ajax form submission");
       }
-    }).then(function(response) {
-      console.log(response);
     });
+
     // $.post("/api/sign-up", userData).then(function(data) {
     //   console.log(data);
     //   $.post("/api/log-in", {
