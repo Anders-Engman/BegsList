@@ -1,45 +1,47 @@
-{{#each item}}
-<div class="layout__main-container itemSingle row" data-user-id="{{../user.id}}">
-    <div class="itemSingle__container col-xl-12 col-lg-10 col-lg-offset-1 col-12">
-        <div class="row">
-            <div class="itemSingle__details col-7">
-                <div class="itemSingle__itemDetails">
-                    <h2>{{this.name}}</h2>
-                    <p>{{this.reason}}</p>
-                </div>
-                <div class="itemSingle__userDetails clearfix">
-                    <a href="/user/{{this.UserId}}">
-                        <img src="{{this.User.imageURL}}" alt="" class="img-fluid">
-                    </a>
-                    <div class="itemSingle__userText">
+<div class="container mt-5">
+    {{#each item}}
+    <div class="layout__main-container itemSingle row" data-user-id="{{../user.id}}">
+        <div class="itemSingle__container col-xl-12 col-lg-10 col-lg-offset-1 col-12">
+            <div class="row">
+                <div class="itemSingle__details col-7">
+                    <div class="itemSingle__itemDetails">
+                        <h2>{{this.name}}</h2>
+                        <p>{{this.reason}}</p>
+                    </div>
+                    <div class="itemSingle__userDetails clearfix">
                         <a href="/user/{{this.UserId}}">
-                            <h4>{{this.User.name}}</h4>
+                            <img src="{{this.User.imageURL}}" alt="" class="img-fluid">
                         </a>
-                        <div class="itemSingle__begScore">Begometer No.:<span class="itemSingle__userScore">{{this.User.begScore}}</span></div>
+                        <div class="itemSingle__userText">
+                            <a href="/user/{{this.UserId}}">
+                                <h4>{{this.User.name}}</h4>
+                            </a>
+                            <div class="itemSingle__begScore">Begometer No.:<span class="itemSingle__userScore">{{this.User.begScore}}</span></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="itemSingle__imageContainer col-5">
-                <img src="{{this.imageURL}}" class="img-fluid img-item-size">
-                <div class="itemSingle__buttonsContainer">
-                    <div class="itemSingle__purchase">
-                        <button onclick="window.open('{{this.itemURL}}')">Purchase</button>
-                    </div>
-                    <div class="itemSingle__arrows">
-                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
-                                class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
-                                class="far fa-arrow-alt-circle-down fa-lg"></i></a>
-                        <div class="itemSingle__voteCount mt-2 text-center">
-                            {{{plusMinusVoteCount this.Votes}}}
+                <div class="itemSingle__imageContainer col-5">
+                    <img src="{{this.imageURL}}" class="img-fluid img-item-size">
+                    <div class="itemSingle__buttonsContainer">
+                        <div class="itemSingle__purchase">
+                            <button onclick="window.open('{{this.itemURL}}')">Purchase</button>
+                        </div>
+                        <div class="itemSingle__arrows">
+                            <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
+                                    class="far fa-arrow-alt-circle-up fa-lg"></i></a>
+                            <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.id ../userInfo}} {{/if}}"><i
+                                    class="far fa-arrow-alt-circle-down fa-lg"></i></a>
+                            <div class="itemSingle__voteCount mt-2 text-center">
+                                {{{plusMinusVoteCount this.Votes}}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="comments" class="layout__comments-section">
+        <h1>USER COMMENTS GO HERE</h1>
+    </div>
+    {{/each}}
 </div>
-<div id="comments" class="layout__comments-section">
-    <h1>USER COMMENTS GO HERE</h1>
-</div>
-{{/each}}

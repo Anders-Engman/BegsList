@@ -1,21 +1,26 @@
 <div class="layout__main-container row" data-user-id="{{user.id}}">
-  {{#each items}}
-  {{!-- Set the div's background color based on the item's Color object/Constructor --}}
-  <div data-id="{{this.Item.id}}" class="layout__item col-12 d-flex" style="background-color: hsla({{this.Color.hue}}, {{this.Color.saturation}}%, {{this.Color.lightness}}%, 0.35)">
-    <a href="items/{{this.Item.id}}" class="mr-auto">
-      <div class="layout__item-name typography__item-name">
-        {{this.Item.name}}
-        <span class="typography__item-user">- {{this.Item.User.name}} </span>
+  <div class="container">
+    <div class="mt-5">
+      {{#each items}}
+      {{!-- Set the div's background color based on the item's Color object/Constructor --}}
+      <div data-id="{{this.Item.id}}" class="layout__item col-12 d-flex" style="background-color: hsla({{this.Color.hue}}, {{this.Color.saturation}}%, {{this.Color.lightness}}%, 0.35)">
+        <a href="items/{{this.Item.id}}" class="mr-auto col-10">
+          <div class="layout__item-name typography__item-name">
+            {{this.Item.name}}
+            <span class="typography__item-user">- {{this.Item.User.name}} </span>
+          </div>
+        </a>
+        <div class="layout__vote-container">
+          <div class="layout__vote-content">
+            <a href="#" data-id="{{this.Item.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                class="far fa-arrow-alt-circle-up fa-lg"></i></a>
+            {{this.dataValues.itemScore}}
+            <a href="#" data-id="{{this.Item.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
+                class="far fa-arrow-alt-circle-down fa-lg"></i></a>
+          </div>
+        </div>
       </div>
-    </a>
-    <div class="layout__vote-container">
-      <div class="layout__vote-content">
-        <a href="#" data-id="{{this.Item.id}}" data-val="1" class="up-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
-            class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-        <a href="#" data-id="{{this.Item.id}}" data-val="-1" class="down-vote {{#if ../userInfo}} {{applySelected this.Item.id ../userInfo}} {{/if}}"><i
-            class="far fa-arrow-alt-circle-down fa-lg"></i></a>
-      </div>
+      {{/each}}
     </div>
   </div>
-  {{/each}}
 </div>
