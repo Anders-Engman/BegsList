@@ -472,3 +472,10 @@ footer {
   width: 100%;
 
 }
+
+.bg-img-search {
+  background-image: url("../images/universe.jpg");
+  background-size: 100% 110%;
+  height: 35rem;
+  color: white;
+}
