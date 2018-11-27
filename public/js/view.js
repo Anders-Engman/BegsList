@@ -7,6 +7,18 @@ $(function () {
     var $newItemInput = $("input.new-item-input");
     $(document).on("click", "#find-items", displaySimilarItems);
 
+    //sliding up for Search Button
+    $(document).on("click", ".slidingUp-Search", function () {
+        $("#sliding-Search").slideUp("100");
+        $("#sliding-SearchItems").attr("style", "display: block")
+    });
+
+    //sliding up for Choose Button 
+    $(document).on("click", ".slidingUp-SearchItems", function () {
+        $("#sliding-SearchItems").slideUp("100");
+        $("#chosenItem").attr("style", "display:block");
+    });
+
     // Function to empty out previous searches
     function clear() {
         $("#display-similar-items").empty();
@@ -25,7 +37,7 @@ $(function () {
         showSearchResults(item);
     }
 
-    //Choose Button to choose a specific item 
+   //Choose Button to choose a specific item 
     $(document).on("click", ".choose-button", function (event) {
         event.preventDefault();
         //FINISHED TODO: DISPLAY THE CHOSEN ITEM HERE 
@@ -55,12 +67,17 @@ $(function () {
         textDiv.append(chosenItemTitle);
         textDiv.append(chosenItemPrice);
 
-        $("#chosen-item-div").append(imageDiv);
-        $("#chosen-item-div").append(textDiv);
+        //Half Page Item Div 
+        var halfItemDiv = $("<div>");
+        halfItemDiv.append(imageDiv);
+        halfItemDiv.append(textDiv);
+        halfItemDiv.addClass("col-4 text-center mr-5")
+
+        $("#chosen-item-div").append(halfItemDiv);
 
         //FINISHED TODO: CREATE A NEW SUBMIT BUTTON 
         var submitButton = $("<button>");
-        submitButton.addClass("btn btn-primary");
+        submitButton.addClass("btn btn-primary w-50");
         submitButton.attr("id", "submit-button");
         submitButton.text("Submit");
         submitButton.attr("data-title", title);
@@ -72,11 +89,23 @@ $(function () {
         var reasonText = $("<textarea>");
         reasonText.addClass("form-control mb-3");
         reasonText.attr("id", "reason-textarea");
+        reasonText.attr("style","width: 100%");
         reasonText.attr("rows", "10");
         reasonText.attr("placeholder", "Add a Reason(s) Why You Need This Item");
 
-        $("#chosen-item-div").append(reasonText);
-        $("#chosen-item-div").append(submitButton);
+        //Half Page Reason Div
+        var halfReasonDiv = $("<div>");
+        halfReasonDiv.append(reasonText);
+        halfReasonDiv.addClass("col-4 text-center")
+
+        $("#chosen-item-div").append(halfReasonDiv);
+
+        var finalSubmitDiv = $("<div>");
+        finalSubmitDiv.addClass("col-3 w-100 mt-5 text-center");
+        finalSubmitDiv.append(submitButton);
+
+        $("#chosen-item-div").append(finalSubmitDiv);
+
     });
 
 
@@ -121,8 +150,8 @@ $(function () {
     });
 
 
-    //show the items search results on browser 
-    function showSearchResults(item) {
+     //show the items search results on browser 
+     function showSearchResults(item) {
         $.post("/api/searchItems", item, function (data) {
             console.log(data);
 
@@ -145,7 +174,7 @@ $(function () {
 
                 //Button to choose 
                 var chooseButton = $("<button>");
-                chooseButton.addClass("btn btn-info choose-button");
+                chooseButton.addClass("btn btn-info choose-button slidingUp-SearchItems");
                 chooseButton.text("Choose");
                 chooseButton.attr("data-title", data[i].title);
                 chooseButton.attr("data-imageURL", data[i].imageURL);
