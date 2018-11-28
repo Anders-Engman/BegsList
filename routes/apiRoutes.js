@@ -4,12 +4,16 @@ require("dotenv").config();
 var request = require("request");
 
 module.exports = function(app) {
-  app.post("/api/comments/", function(req, res) {
-    console.log("hi");
-    res.end("hi");
-    db.BegComment.find({
-      where: {}
-    });
+  app.post("/api/comments", function(req, res) {
+    console.log(req.body);
+    console.log(req.user);
+    console.log(req.body.commentText);
+    var commentObj = {
+      ItemId: req.body.itemId,
+      text: req.body.commmentText,
+      UserId: req.user.id
+    };
+    db.Comment.create(commentObj).then(function() {});
   });
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)

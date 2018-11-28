@@ -124,7 +124,7 @@ module.exports = function(app) {
 
   // Load Item Template - pass db Item via ItemId
   app.get("/items/:id", function(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
     db.Item.findAll({
       where: { id: req.params.id },
       include: [{ model: db.User }, { model: db.Vote }]
@@ -133,15 +133,32 @@ module.exports = function(app) {
         db.Vote.findAll({
           where: { UserId: req.user.id }
         }).then(function(userVotes) {
-          res.render("item-single", {
-            item: dbItem,
-            user: req.user,
-            userInfo: userVotes,
-            helpers: {
-              plusMinusVoteCount: plusMinusVoteCount,
-              applySelected: applySelected
+          db.Comment.findAll({ where: { ItemId: req.params.id } }).then(
+            function(itemComments) {
+              var itemCommentsParse = [];
+              for (var i = 0; i < itemComments.length; i++) {
+                db.User.findOne({ where: { id: itemComments[i].UserId } }).then(
+                  function(comUser) {
+                    var blobToPush = {
+                      UserID: comUser.Id,
+                      text: itemComments[i].commentText
+                    };
+                    itemCommentsParse.push(blobToPush);
+                  }
+                );
+              }
+              res.render("item-single", {
+                item: dbItem,
+                comments: itemCommentsParse,
+                user: req.user,
+                userInfo: userVotes,
+                helpers: {
+                  plusMinusVoteCount: plusMinusVoteCount,
+                  applySelected: applySelected
+                }
+              });
             }
-          });
+          );
         });
       } else {
         res.render("item-single", {

@@ -3,4 +3,4 @@ DROP DATABASE IF EXISTS begslist;
 -- Creates the "blogger" database --
 CREATE DATABASE begslist;
 
-SELECT * FROM begslist;
+SELECT * FROM comments;
