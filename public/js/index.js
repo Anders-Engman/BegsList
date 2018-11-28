@@ -72,11 +72,6 @@ $(document).ready(function() {
     }
   });
 
-  // Comments Section Code
-  $(".submitComment").on("click", function(event) {
-
-  });
-
 $(".up-vote [data-id='1']").on("click", function(e) {
   console.this.addClass("selected-up-vote");
 });

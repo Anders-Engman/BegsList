@@ -4,6 +4,13 @@ require("dotenv").config();
 var request = require("request");
 
 module.exports = function(app) {
+  app.post("/api/comments/", function(req, res) {
+    console.log("hi");
+    res.end("hi");
+    db.BegComment.find({
+      where: {}
+    });
+  });
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
       .then(function(dbUser) {
