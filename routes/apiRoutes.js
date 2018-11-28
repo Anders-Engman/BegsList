@@ -33,11 +33,13 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  //GET Similar Search Items
+  //POST route for Similar Search Items
   app.post("/api/searchItems", function(req, res) {
     var appId = process.env.EBAY_APIKEY;
     var itemName = req.body.name;
+    var page = parseInt(req.body.page);
 
+    //Using Finding Ebay API to get the itemID
     var query_Finding_URL =
       "http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=" +
       appId +
@@ -47,31 +49,31 @@ module.exports = function(app) {
 
     request(query_Finding_URL, function(error, response, body) {
       if (!error && response.statusCode === 200) {
-        // console.log(
-        //   JSON.parse(body).findItemsAdvancedResponse[0].searchResult[0].item
-        // );
-
         var newItemId = JSON.parse(body).findItemsAdvancedResponse[0]
           .searchResult[0].item[0].itemId;
+        var resultNumber = 8 * page;
 
+        //Use the ItemID to apply in Merchandising Ebay getSimilarItems API
         var query_Similar_URL =
           "http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=" +
           appId +
           "&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=" +
           newItemId +
-          "&maxResults=24";
+          "&maxResults=" +
+          resultNumber;
 
         request(query_Similar_URL, function(error, response, body) {
           if (!error && response.statusCode === 200) {
-            // console.log(
-            //   JSON.parse(body).getSimilarItemsResponse.itemRecommendations.item
-            // );
-
             var itemList = JSON.parse(body).getSimilarItemsResponse
               .itemRecommendations.item;
+
             var similarItemsObj = [];
 
-            for (var i = 0; i < itemList.length; i++) {
+            //offset logic for 'show more' items search results loading
+            var i;
+            i = (page - 1) * 8;
+
+            for (i; i < itemList.length; i++) {
               similarItemsObj.push({
                 itemId: itemList[i].itemId,
                 title: itemList[i].title,
@@ -93,9 +95,22 @@ module.exports = function(app) {
     db.Item.create({
       name: req.body.name,
       itemURL: req.body.itemURL,
-      reason: req.body.reason
+      reason: req.body.reason,
+      imageURL: req.body.imageURL,
+      UserId: req.user.id
     }).then(function(dbItem) {
-      //console.log(dbItem);
+      
+      //When a new chosen item is selected, 
+      //a upVote value is added to the Vote table
+      //for displaying purpose 
+      //(if no vote value, then no item will be displayed 
+      //-- See htmlRoutes for the logic!)
+      db.Vote.create({
+        voteValue: 1,
+        ItemId: dbItem.dataValues.id,
+        UserId: req.user.id
+      });
+
       res.json(dbItem);
     });
   });
@@ -150,27 +165,30 @@ module.exports = function(app) {
           ItemId: req.body.ItemId,
           UserId: req.body.UserId
         }).then(vote => {
-          res.send({
-            newVote: true
-          });
+          res.json(vote);
         });
       }
       // If the Vote DOES exist,
       else {
         console.log("existing vote!");
         //check to see if the voteValue is equal
-        if (vote.voteValue !== req.body.voteValue) {
+        if (
+          Number.parseInt(vote.voteValue) !==
+          Number.parseInt(req.body.voteValue)
+        ) {
           db.Vote.destroy({
             where: {
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }
           }).then(vote => {
+            console.log("old vote deleted");
             db.Vote.create({
               voteValue: req.body.voteValue,
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }).then(vote => {
+              console.log("new vote created");
               res.json(vote);
             });
           });
@@ -182,6 +200,7 @@ module.exports = function(app) {
               UserId: req.body.UserId
             }
           }).then(vote => {
+            console.log("old vote deleted, no new one created");
             res.json(vote);
           });
         }

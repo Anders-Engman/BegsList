@@ -1,15 +1,25 @@
 {{!-- a modal that will prompt the user for a username and password --}}
-
-<div class="layout__login-modal">
-    {{!-- a modal that will collect basic info from the user and allow them to sign up for begslist --}}
-
-    <form class="login-form">
-        <label class="form-label" for="username">Username</label>
-        <input name="username" type="text" class="form-item login-form-username">
-        <label class="form-label" for="password">Password</label>
-        <input name="password" type="text" class="form-item login-form-password">
-        <input name="submit" type="submit" class="form-item login-form-submit">
-    </form>
-
-
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log In to Beg's List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="login-form">
+                    <label class="form-label" for="username">Username</label>
+                    <input name="username" type="text" class="form-item login-form-username">
+                    <label class="form-label" for="password">Password</label>
+                    <input name="password" type="password" class="form-item login-form-password">
+                    <input name="submit" type="submit" class="form-item login-form-submit">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

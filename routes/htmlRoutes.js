@@ -1,13 +1,20 @@
 var db = require("../models");
+
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
+// Custom Middleware to create dynamic gradient
+require("../config/middleware/gradientSort");
+
+// Custom Middleware to sort Index by Vote Sum, to total Vote Counts, to implement frontend Vote displays
+require("../config/middleware/voteSortLogic");
+
 // ==== Debugging Functions ==== //
 // Log Sequelize Statements as raw SQL
-function sqlLogger(msg) {
+sqlLogger = function(msg) {
   console.log("SQL Log:");
   console.log(msg);
-}
+};
 
 // Console log rank and color
 logRankAndColor = function(results) {
@@ -22,61 +29,34 @@ logRankAndColor = function(results) {
   }
 };
 
-// Creat Color Constructor to add to returned Sequelize Model
-function Color(hslObject) {
-  this.hue = hslObject.hue;
-  this.saturation = hslObject.saturation;
-  this.lightness = hslObject.lightness;
-}
-
-// Sort Sequelize Query by the Items' voteScore
-sortByItemScoreSum = function(results) {
-  results.sort(function(a, b) {
-    return b.dataValues.itemScore - a.dataValues.itemScore;
-  });
-};
-
-// Calculate the rate of Color change from top color to bottom color
-calcColorChange = function(topColor, bottomColor, listLength) {
-  var colorDistance = {
-    hue: topColor.hue - bottomColor.hue,
-    saturation: topColor.saturation - bottomColor.saturation,
-    lightness: topColor.lightness - bottomColor.lightness
-  };
-  var colorChangePerItem = {
-    hue: Math.floor(colorDistance.hue / (listLength - 1)),
-    saturation: Math.floor(colorDistance.saturation / (listLength - 1)),
-    lightness: Math.floor(colorDistance.lightness / (listLength - 1))
-  };
-  return colorChangePerItem;
-};
-
-// Set the div's item color based on it position relative to the topColor/topItem
-setItemColor = function(startColor, hslValue, itemRank) {
-  return {
-    hue: startColor.hue - hslValue.hue * itemRank,
-    saturation: startColor.saturation - hslValue.saturation * itemRank,
-    lightness: startColor.lightness - hslValue.lightness * itemRank
-  };
-};
-
-insertItemColorVal = function(results) {
-  // Set topColor and bottomColor values for gradient change
-  var greenest = { hue: 130, saturation: 87, lightness: 45 };
-  var reddest = { hue: 10, saturation: 87, lightness: 45 };
-  hslDeltaVal = calcColorChange(greenest, reddest, results.length);
-  for (var i = 0; i < results.length; i++) {
-    itemColor = setItemColor(greenest, hslDeltaVal, i);
-    results[i].Color = new Color(itemColor);
-  }
-};
-
 module.exports = function(app) {
+<<<<<<< HEAD
+=======
+  app.get("/unauth", function(req, res) {
+    db.Vote.findAll({
+      attributes: [
+        [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
+        "ItemId"
+      ],
+      group: ["ItemId"],
+      include: [{ model: db.Item, include: { model: db.User } }]
+      // logging: sqlLogger
+    }).then(function(dbItems) {
+      sortByItemScoreSum(dbItems);
+      insertItemColorVal(dbItems);
+      res.render("index", {
+        items: dbItems
+      });
+    });
+  });
+
+>>>>>>> origin
   // Load homepage
-  app.get("/", isAuthenticated, function(req, res) {
+  app.get("/", function(req, res) {
     // object destructuring: this miracle syntax allows you to ref
     // "userName" as if you were referencing "req.user.userName";
     // saves keystrokes.
+<<<<<<< HEAD
     var { userName, bio, image, begScore, last_login, name } = req.user;
     var userData = {
       userName: userName,
@@ -87,17 +67,36 @@ module.exports = function(app) {
       name: name
     };
     console.log(userData.image);
+=======
+    // var { id, userName, bio, image, begScore, last_login, name } = req.user;
+    // var userData = {
+    //   id: id,
+    //   userName: userName,
+    //   bio: bio,
+    //   image: image,
+    //   begScore: begScore,
+    //   last_login: last_login,
+    //   name: name
+    // };
+
+    console.log(req.user);
+
+    //On homepage load, find the SUM of every ItemId's voteValue, sequelize returns this data by ItemId ascending
+>>>>>>> origin
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
-      logging: sqlLogger
+      include: [{ model: db.Item, include: [{ model: db.User }] }]
     }).then(function(dbItems) {
+      // Sort Items by itemScore from High to Low (located in /config/middleware/voteSortLogic)
       sortByItemScoreSum(dbItems);
+
+      //Apply Color Property to the Item in relation to topColor/bottomColor and position on list (located in /config/middleware/gradientSort)
       insertItemColorVal(dbItems);
+<<<<<<< HEAD
       res.render("index", {
         items: dbItems,
         user: userData
@@ -122,17 +121,128 @@ module.exports = function(app) {
     });
   });
   //load items page (Beg input and suggested items list)
-  app.get("/items", function(req, res) {
-    db.Item.findAll({}).then(function(dbItem) {
-      res.render("items");
+=======
+
+      // If the user is defined, find the User's Vote history and then render the index template, else skip querying the vote history and render index
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("index", {
+            items: dbItems,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
+        res.render("index", {
+          items: dbItems,
+          user: req.user,
+          helpers: {
+            plusMinusVoteCount: plusMinusVoteCount,
+            applySelected: applySelected
+          }
+        });
+      }
     });
   });
+
+  //Load search items page (Beg input and suggested items list)
+>>>>>>> origin
+  app.get("/items", function(req, res) {
+    res.render("items", {
+      user: req.user
+    });
+  });
+<<<<<<< HEAD
   // Load example page and pass in an example by id
-  app.get("/items/:id", function(req, res) {
-    db.Item.findAll({}).then(function(dbExample) {
-      res.render("item-single", {
-        example: dbExample
+=======
+
+    //Load About Page 
+    app.get("/about", function (req, res) {
+      res.render("about", {
+        user: req.user
       });
+    });
+
+  app.get("/test-modal", function(req, res) {
+    res.render("test", {
+      user: req.user
+    });
+  });
+
+  // Load Item Template - pass db Item via ItemId
+>>>>>>> origin
+  app.get("/items/:id", function(req, res) {
+    console.log(req.user);
+    db.Item.findAll({
+      where: { id: req.params.id },
+      include: [{ model: db.User }, { model: db.Vote }]
+    }).then(function(dbItem) {
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("item-single", {
+            item: dbItem,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
+        res.render("item-single", {
+          item: dbItem,
+          user: req.user,
+          helpers: {
+            plusMinusVoteCount: plusMinusVoteCount,
+            applySelected: applySelected
+          }
+        });
+      }
+    });
+  });
+
+  // Load User Template - pass db Item via ItemId
+  app.get("/user/:id", function(req, res) {
+    console.log(req.user);
+    db.User.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [{ model: db.Item, include: { model: db.Vote } }]
+    }).then(function(dbUser) {
+      if (req.user) {
+        db.Vote.findAll({
+          where: { UserId: req.user.id }
+        }).then(function(userVotes) {
+          res.render("user-single", {
+            userView: dbUser,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
+            }
+          });
+        });
+      } else {
+        res.render("user-single", {
+          userView: dbUser,
+          user: req.user,
+          helpers: {
+            plusMinusVoteCount: plusMinusVoteCount,
+            applySelected: applySelected
+          }
+        });
+      }
     });
   });
 
