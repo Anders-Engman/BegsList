@@ -23,11 +23,11 @@
   <div class="wrapper">
     <div class="layout__side-bar active">
       <nav id="sidebar">
-        <div class="layout__side-bar-container">
+        <div class="layout__side-bar-container text-secondary">
           <ul class="list-unstyled components">
-            <li><a href="">About Beg's List</a></li>
+            <li><a href="/about">About Beg's List</a></li>
             <li><a href="/items">Beg</a></li>
-            <li>{{> auth/inline-user}}</li>
+            {{> auth/inline-user-sideNav}}
           </ul>
           <div id="collapseToggle" class="side-bar__collapse mt-auto text-center">
             Collapse <i class="far fa-arrow-alt-circle-left"></i>
@@ -37,20 +37,27 @@
     </div>
     <div class="layout__main">
       <nav class="layout__navbar typography__navbar navbar sticky-top navbar-expand-xl navbar-light bg-light">
-        <div class="layout__navbar-nav container">
-          <a href="#" class="menu" id="sidebarToggle"><span></span></a>
-          <a href="/">
-            <h1 class="typography__site-heading">Beg's List</h1>
-          </a>
-          {{> auth/inline-user}}
+        <div class="layout__navbar-nav container-fluid">
+            <div class="col-1">
+              <a href="#" class="menu" id="sidebarToggle"><span></span></a>
+            </div>
+            <div >
+              <a href="/">
+                <h1 class="typography__site-heading ml-5 pl-5">Beg's List</h1>
+              </a>
+            </div>
+            <div>
+              {{> auth/inline-user}}
+            </div>
         </div>
       </nav>
-      <main id="main-list">
-          {{{body}}}
+      <main id="main-list mb-0">
+
+        {{{body}}}
+
       </main>
-      <footer>
+      <footer class="mt-4 mb-5">
         <p>&copy; Beg's List 2018</p>
-        <a href="/logout">Logout</a>
       </footer>
     </div>
   </div>
@@ -58,6 +65,7 @@
   <!-- Modal Section -->
   {{> auth/login-modal}}
   {{> auth/signup-modal}}
+  {{> instruction/instruction-modal}}
   <script src="/js/index.js" type="text/javascript"></script>
   <script src="/js/signup.js" type="text/javascript"></script>
 </body>
