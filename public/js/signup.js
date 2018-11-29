@@ -24,12 +24,12 @@ $(document).ready(function() {
       image: signUpImgurl.val().trim()
     };
     $.post("/api/sign-up", userData).then(function(data) {
-      console.log(data);
+      // console.log(data);
       $.post("/api/log-in", {
         userName: data.userName,
         password: userData.password
       }).then(function(data) {
-        console.log(data);
+        // console.log(data);
         window.location.replace(data);
       });
     });
@@ -42,11 +42,11 @@ $(document).ready(function() {
       password: logInPassword.val().trim()
     })
       .then(function(data) {
-        console.log(data);
+        // console.log(data);
         window.location.replace(data);
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
       });
   });
   // signUpLink.on("click", function(e) {
@@ -62,7 +62,7 @@ $(document).ready(function() {
   // });
   $(window).keydown(function(e) {
     if (e.keyCode === 27) {
-      console.log("Excape!");
+      // console.log("Excape!");
       modalObscure.css("display", "none");
       signUpModal.css("display", "none");
       loginModal.css("display", "none");
