@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
   var Item = sequelize.define("Item", {
     name: {
       type: DataTypes.STRING,
@@ -22,11 +22,12 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  Item.associate = function (models) {
+  Item.associate = function(models) {
     // Associating Item with Posts
     // When an Item is deleted, also delete any associated Posts
     Item.belongsTo(models.User, {});
     Item.hasMany(models.Vote, {});
+    Item.hasMany(models.BegComment, {});
   };
   return Item;
 };

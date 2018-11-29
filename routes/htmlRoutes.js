@@ -116,12 +116,12 @@ module.exports = function(app) {
     });
   });
 
-    //Load About Page 
-    app.get("/about", function (req, res) {
-      res.render("about", {
-        user: req.user
-      });
+  //Load About Page
+  app.get("/about", function(req, res) {
+    res.render("about", {
+      user: req.user
     });
+  });
 
   app.get("/test-modal", function(req, res) {
     res.render("test", {
@@ -131,11 +131,16 @@ module.exports = function(app) {
 
   // Load Item Template - pass db Item via ItemId
   app.get("/items/:id", function(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
     db.Item.findAll({
       where: { id: req.params.id },
-      include: [{ model: db.User }, { model: db.Vote }]
+      include: [
+        { model: db.User },
+        { model: db.Vote },
+        { model: db.BegComment }
+      ]
     }).then(function(dbItem) {
+      // console.log(dbItem);
       if (req.user) {
         db.Vote.findAll({
           where: { UserId: req.user.id }

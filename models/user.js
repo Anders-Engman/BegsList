@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating User with Items
     User.hasMany(models.Item, {});
     User.hasMany(models.Vote, {});
-    User.hasMany(models.Comment, {});
+    User.hasMany(models.BegComment, {});
   };
   return User;
 };

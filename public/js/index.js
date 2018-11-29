@@ -72,8 +72,8 @@ $(document).ready(function() {
       $("#loginModal").modal("show");
     }
   });
-});
 
-$(".up-vote [data-id='1']").on("click", function(e) {
-  console.this.addClass("selected-up-vote");
+  $(".up-vote [data-id='1']").on("click", function(e) {
+    console.this.addClass("selected-up-vote");
+  });
 });

@@ -40,8 +40,38 @@
             </div>
         </div>
     </div>
-    <div id="comments" class="layout__comments-section">
-        <h1>USER COMMENTS GO HERE</h1>
+    {{/each}}
+</div>
+<div id="comments" class="layout__comments-section container mt-5">
+    {{#each item}}
+    <div class="col-xl-12 col-lg-10 col-lg-offset-1 col-12">
+        <div class="row">
+            <div class="col-8">
+                {{#each this.BegComments}}
+                {{log this}}
+                <div class="row">
+                    <div class="col-12">
+                        <p>{{this.text}}</p>
+                    </div>
+                </div>
+                {{/each}}
+                <hr class="mt-4 mb-2">
+                <div class="row">
+                    <form>
+                        <div class="form-group">
+                            <label for="user-comment-box" class="d-block">Comments</label>
+                            <textarea id="user-comment-box" rows="4" cols="50"></textarea>
+                            <div class="itemSingle__buttonsContainer">
+                                <div class="itemSingle__purchase">
+                                    <button data-item-id={{this.id}} id="subButton" class="btn" href="#">Submit Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
     {{/each}}
 </div>
