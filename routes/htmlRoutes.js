@@ -30,8 +30,6 @@ logRankAndColor = function(results) {
 };
 
 module.exports = function(app) {
-<<<<<<< HEAD
-=======
   app.get("/unauth", function(req, res) {
     db.Vote.findAll({
       attributes: [
@@ -50,24 +48,11 @@ module.exports = function(app) {
     });
   });
 
->>>>>>> origin
   // Load homepage
   app.get("/", function(req, res) {
     // object destructuring: this miracle syntax allows you to ref
     // "userName" as if you were referencing "req.user.userName";
     // saves keystrokes.
-<<<<<<< HEAD
-    var { userName, bio, image, begScore, last_login, name } = req.user;
-    var userData = {
-      userName: userName,
-      bio: bio,
-      image: image,
-      begScore: begScore,
-      last_login: last_login,
-      name: name
-    };
-    console.log(userData.image);
-=======
     // var { id, userName, bio, image, begScore, last_login, name } = req.user;
     // var userData = {
     //   id: id,
@@ -82,7 +67,6 @@ module.exports = function(app) {
     console.log(req.user);
 
     //On homepage load, find the SUM of every ItemId's voteValue, sequelize returns this data by ItemId ascending
->>>>>>> origin
     db.Vote.findAll({
       attributes: [
         [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
@@ -96,32 +80,6 @@ module.exports = function(app) {
 
       //Apply Color Property to the Item in relation to topColor/bottomColor and position on list (located in /config/middleware/gradientSort)
       insertItemColorVal(dbItems);
-<<<<<<< HEAD
-      res.render("index", {
-        items: dbItems,
-        user: userData
-      });
-    });
-  });
-  app.get("/unauth", function(req, res) {
-    db.Vote.findAll({
-      attributes: [
-        [db.sequelize.fn("SUM", db.sequelize.col("voteValue")), "itemScore"],
-        "ItemId"
-      ],
-      group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }],
-      logging: sqlLogger
-    }).then(function(dbItems) {
-      sortByItemScoreSum(dbItems);
-      insertItemColorVal(dbItems);
-      res.render("index", {
-        items: dbItems
-      });
-    });
-  });
-  //load items page (Beg input and suggested items list)
-=======
 
       // If the user is defined, find the User's Vote history and then render the index template, else skip querying the vote history and render index
       if (req.user) {
@@ -152,22 +110,18 @@ module.exports = function(app) {
   });
 
   //Load search items page (Beg input and suggested items list)
->>>>>>> origin
   app.get("/items", function(req, res) {
     res.render("items", {
       user: req.user
     });
   });
-<<<<<<< HEAD
-  // Load example page and pass in an example by id
-=======
 
-    //Load About Page 
-    app.get("/about", function (req, res) {
-      res.render("about", {
-        user: req.user
-      });
+  //Load About Page
+  app.get("/about", function(req, res) {
+    res.render("about", {
+      user: req.user
     });
+  });
 
   app.get("/test-modal", function(req, res) {
     res.render("test", {
@@ -176,7 +130,6 @@ module.exports = function(app) {
   });
 
   // Load Item Template - pass db Item via ItemId
->>>>>>> origin
   app.get("/items/:id", function(req, res) {
     console.log(req.user);
     db.Item.findAll({

@@ -2,8 +2,18 @@ var db = require("../models");
 var passport = require("../config/passport");
 require("dotenv").config();
 var request = require("request");
+var formidable = require("formidable");
 
 module.exports = function(app) {
+  app.post("/api/upload-user-image", function(req, res) {
+    console.log("API post route: user-image-upload");
+    var form = new formidable.IncomingForm();
+    form.uploadDir = "./public/images/avatars";
+    form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+      res.send("Pics or it didn't happen");
+    });
+  });
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
       .then(function(dbUser) {
@@ -99,11 +109,10 @@ module.exports = function(app) {
       imageURL: req.body.imageURL,
       UserId: req.user.id
     }).then(function(dbItem) {
-      
-      //When a new chosen item is selected, 
+      //When a new chosen item is selected,
       //a upVote value is added to the Vote table
-      //for displaying purpose 
-      //(if no vote value, then no item will be displayed 
+      //for displaying purpose
+      //(if no vote value, then no item will be displayed
       //-- See htmlRoutes for the logic!)
       db.Vote.create({
         voteValue: 1,

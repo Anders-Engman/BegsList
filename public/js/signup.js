@@ -2,8 +2,8 @@ var signUpUsername = $(".signup-form-username");
 var signUpPassword = $(".signup-form-password");
 var signUpBio = $(".signup-form-bio");
 var signUpName = $(".signup-form-name");
-var signUpImgurl = $(".signup-form-imgurl");
-var signUpSubmit = $(".signup-form-submit");
+var signUpImg = $("#signup-form-img");
+var signUpSubmit = $("#signup-form-submit");
 var logInUsername = $(".login-form-username");
 var logInPassword = $(".login-form-password");
 var logInSubmit = $(".login-form-submit");
@@ -12,7 +12,20 @@ var logInSubmit = $(".login-form-submit");
 var modalObscure = $(".modal-obscure");
 var loginModal = $(".layout__login-modal");
 var signUpModal = $(".layout__signup-modal");
+var imageUrl = "";
 $(document).ready(function() {
+  // handler for uploading image to server
+  signUpImg.on("change", function(e) {
+    e.preventDefault();
+    console.log($(this)[0].files[0]);
+    var imageFormData = new FormData();
+    imageFormData.append("file", $(this)[0].files[0]);
+    $.post("/api/upload-user-image", { data: imageFormData }).then(function(
+      response
+    ) {
+      console.log(response);
+    });
+  });
   // handler for new user modal submit button
   signUpSubmit.on("click", function(e) {
     e.preventDefault();
@@ -21,7 +34,7 @@ $(document).ready(function() {
       password: signUpPassword.val().trim(),
       bio: signUpBio.val().trim(),
       name: signUpName.val().trim(),
-      image: signUpImgurl[0].files[0]
+      image: imageUrl
     };
     console.log(userData);
     $.ajax({
