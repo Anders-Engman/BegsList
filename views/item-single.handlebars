@@ -9,7 +9,9 @@
                         <p>{{this.reason}}</p>
                     </div>
                     <div class="itemSingle__userDetails clearfix">
-
+                        <a href="/user/{{this.UserId}}">
+                            <img src="{{this.User.imageURL}}" alt="" class="img-fluid">
+                        </a>
                         <div class="itemSingle__userText">
                             <a href="/user/{{this.UserId}}">
                                 <h4>{{this.User.name}}</h4>
