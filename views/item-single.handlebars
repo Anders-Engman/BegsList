@@ -9,9 +9,7 @@
                         <p>{{this.reason}}</p>
                     </div>
                     <div class="itemSingle__userDetails clearfix">
-                        <a href="/user/{{this.UserId}}">
-                            <img src="{{this.User.imageURL}}" alt="" class="img-fluid">
-                        </a>
+
                         <div class="itemSingle__userText">
                             <a href="/user/{{this.UserId}}">
                                 <h4>{{this.User.name}}</h4>
@@ -51,10 +49,15 @@
                 {{#each this.BegComments}}
                 {{log this}}
                 <div class="row mb-3">
-                    <a href="/user/{{this.UserId}}" class="col-2">
+                    <div class="col-2">
                         <img src="{{this.User.imageURL}}" class="img-fluid">
-                        <h4>{{this.User.name}}</h4>
-                    </a>
+                    </div>
+
+                    <div class="col-2">
+                        <a href="/user/{{this.UserId}}">
+                            <h4>{{this.User.name}}</h4>
+                        </a>
+                    </div>
                     <div class="col-8">
                         <div class="commentTextTile" style="display: table; clear: both">{{this.text}}</div>
                         {{!-- <div class="col-12">{{this.createdAt}}</div> --}}
