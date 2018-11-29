@@ -18,6 +18,7 @@ passport.use(
         } else if (!dbUser.validPassword(password)) {
           return done(null, false, { message: "Incorrect Password" });
         }
+        delete dbUser["password"];
         return done(null, dbUser);
       });
     }

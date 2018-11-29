@@ -21,7 +21,7 @@ $(document).ready(function() {
       password: signUpPassword.val().trim(),
       bio: signUpBio.val().trim(),
       name: signUpName.val().trim(),
-      image: signUpImgurl.val().trim()
+      imageURL: signUpImgurl.val().trim()
     };
     $.post("/api/sign-up", userData).then(function(data) {
       // console.log(data);
