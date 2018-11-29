@@ -1,52 +1,54 @@
-{{#each userView}}
-<div class="layout__main-container itemSingle row" data-user-id="{{../user.id}}">
-    <div class="itemSingle__container col-xl-12 col-lg-10 col-lg-offset-1 col-12">
-        <div class="row">
-            <div class="itemSingle__details col-7">
-                <div class="userSingle__userDetails">
-                    <h2>{{this.name}}</h2>
-                    <p>{{this.bio}}</p>
+<div class="container mt-5">
+    {{#each userView}}
+    <div class="layout__main-container itemSingle row" data-user-id="{{../user.id}}">
+        <div class="itemSingle__container col-xl-12 col-lg-10 col-lg-offset-1 col-12">
+            <div class="row">
+                <div class="itemSingle__details col-7">
+                    <div class="userSingle__userDetails">
+                        <h2>{{this.name}}</h2>
+                        <p>{{this.bio}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="itemSingle__imageContainer col-5">
-                <img src="{{this.imageURL}}" class="img-fluid">
-                <div class="itemSingle__buttonsContainer">
-                    <div class="userSingle__begScore text-center">
-                        <h3>Begometer No.:</h3>
-                        <div class="userBegScore">{{this.begScore}}</div>
+                <div class="itemSingle__imageContainer col-5">
+                    <img src="{{this.imageURL}}" class="img-fluid">
+                    <div class="itemSingle__buttonsContainer">
+                        <div class="userSingle__begScore text-center">
+                            <h3>Begometer No.:</h3>
+                            <div class="userBegScore">{{this.begScore}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="userItems" class="layout__comments-section">
-    <h2>{{this.name}}'s Beg List</h2>
-    {{#each this.Items}}
-    {{!-- {{log this.Votes}} --}}
-    <div class="row">
-        <div class="userSingle__item col-12 d-flex">
-            <a href="/items/{{this.id}}">
-                <img src="{{this.itemURL}}" class="img-fluid">
-            </a>
-            <div class="userSingle__itemContainer">
-                <p>
-                    <a href="/items/{{this.id}}">
-                        {{this.name}}
-                    </a>
-                </p>
-                <div class="userSingle__arrows">
-                    <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../../userInfo}} {{applySelected this.id ../../userInfo}} {{/if}}"><i
-                            class="far fa-arrow-alt-circle-up fa-lg"></i></a>
-                    <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../../userInfo}} {{applySelected this.id ../../userInfo}} {{/if}}"><i
-                            class="far fa-arrow-alt-circle-down fa-lg"></i></a>
-                    <div class="userSingle__votesCount">
-                        {{{plusMinusVoteCount this.Votes}}}
+    <div id="userItems" class="layout__comments-section">
+        <h2>{{this.name}}'s Beg List</h2>
+        {{#each this.Items}}
+        {{!-- {{log this.Votes}} --}}
+        <div class="row">
+            <div class="userSingle__item col-12 d-flex">
+                <a href="/items/{{this.id}}">
+                    <img src="{{this.imageURL}}" class="img-fluid">
+                </a>
+                <div class="userSingle__itemContainer">
+                    <p>
+                        <a href="/items/{{this.id}}">
+                            {{this.name}}
+                        </a>
+                    </p>
+                    <div class="userSingle__arrows">
+                        <a href="#" data-id="{{this.id}}" data-val="1" class="up-vote {{#if ../../userInfo}} {{applySelected this.id ../../userInfo}} {{/if}}"><i
+                                class="far fa-arrow-alt-circle-up fa-lg"></i></a>
+                        <a href="#" data-id="{{this.id}}" data-val="-1" class="down-vote {{#if ../../userInfo}} {{applySelected this.id ../../userInfo}} {{/if}}"><i
+                                class="far fa-arrow-alt-circle-down fa-lg"></i></a>
+                        <div class="userSingle__votesCount">
+                            {{{plusMinusVoteCount this.Votes}}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{/each}}
     </div>
     {{/each}}
 </div>
-{{/each}}

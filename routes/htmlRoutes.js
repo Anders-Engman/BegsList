@@ -116,6 +116,13 @@ module.exports = function(app) {
     });
   });
 
+    //Load About Page 
+    app.get("/about", function (req, res) {
+      res.render("about", {
+        user: req.user
+      });
+    });
+
   app.get("/test-modal", function(req, res) {
     res.render("test", {
       user: req.user

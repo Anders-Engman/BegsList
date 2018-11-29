@@ -106,9 +106,22 @@ module.exports = function(app) {
     db.Item.create({
       name: req.body.name,
       itemURL: req.body.itemURL,
-      reason: req.body.reason
+      reason: req.body.reason,
+      imageURL: req.body.imageURL,
+      UserId: req.user.id
     }).then(function(dbItem) {
-      //console.log(dbItem);
+      
+      //When a new chosen item is selected, 
+      //a upVote value is added to the Vote table
+      //for displaying purpose 
+      //(if no vote value, then no item will be displayed 
+      //-- See htmlRoutes for the logic!)
+      db.Vote.create({
+        voteValue: 1,
+        ItemId: dbItem.dataValues.id,
+        UserId: req.user.id
+      });
+
       res.json(dbItem);
     });
   });

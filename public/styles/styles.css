@@ -75,16 +75,19 @@
   width: 32px;
   height: 32px;
 }
+
 .menu span {
   margin: 0 auto;
   position: relative;
   top: 12px;
 }
+
 .menu span:before,
 .menu span:after {
   position: absolute;
   content: "";
 }
+
 .menu span,
 .menu span:before,
 .menu span:after {
@@ -93,23 +96,28 @@
   background-color: #777;
   display: block;
 }
+
 .menu span:before {
   margin-top: -12px;
 }
+
 .menu span:after {
   margin-top: 12px;
 }
+
 .menu span {
   -webkit-transition-duration: 0s;
   transition-duration: 0s;
   -webkit-transition-delay: 300ms;
   transition-delay: 300ms;
 }
+
 .menu.active span {
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition-delay: 300ms;
   transition-delay: 300ms;
 }
+
 .menu span:before {
   -webkit-transition-property: margin, -webkit-transform;
   transition-property: margin, transform;
@@ -118,6 +126,7 @@
   -webkit-transition-delay: 300ms, 0s;
   transition-delay: 300ms, 0s;
 }
+
 .menu.active span:before {
   margin-top: 0;
   -webkit-transform: rotate(45deg);
@@ -125,6 +134,7 @@
   -webkit-transition-delay: 0s, 300ms;
   transition-delay: 0s, 300ms;
 }
+
 .menu span:after {
   -webkit-transition-property: margin, -webkit-transform;
   transition-property: margin, transform;
@@ -133,6 +143,7 @@
   -webkit-transition-delay: 300ms, 0s;
   transition-delay: 300ms, 0s;
 }
+
 .menu.active span:after {
   margin-top: 0;
   -webkit-transform: rotate(-45deg);
@@ -161,7 +172,7 @@
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
 }
 
-.layout__item > a {
+.layout__item>a {
   display: flex;
   align-items: center;
 }
@@ -211,8 +222,7 @@ a:hover {
   opacity: 0.75;
 }
 
-.typography__navbar {
-}
+.typography__navbar {}
 
 .typography__site-heading {
   font-size: 2.5rem;
@@ -430,6 +440,7 @@ footer {
 .userSingle__item {
   margin-bottom: 24px;
 }
+
 .userSingle__item img {
   border: 1px solid #707070;
   max-height: 104px;
@@ -450,7 +461,21 @@ footer {
 .layout__inline-user {
   color: #777;
 }
+
 .layout__signup-modal,
 .layout__login-modal {
   cursor: pointer;
+}
+
+.img-item-size {
+  height: auto;
+  width: 100%;
+
+}
+
+.bg-img-search {
+  background-image: url("../images/universe.jpg");
+  background-size: 100% 110%;
+  height: 35rem;
+  color: white;
 }
