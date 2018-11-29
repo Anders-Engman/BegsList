@@ -42,35 +42,41 @@
     </div>
     {{/each}}
 </div>
-<div id="comments" class="layout__comments-section container mt-5">
+<div id="comments" class="layout__comments-section container mt-5 mb-5">
     {{#each item}}
     <div class="col-xl-12 col-lg-10 col-lg-offset-1 col-12">
-        <div class="row">
-            <form>
-                <div class="form-group">
-                    <label for="user-comment-box" class="d-block">Comments</label>
-                    <textarea id="user-comment-box" rows="4" cols="50"></textarea>
-                    <div class="itemSingle__buttonsContainer">
-                        <div class="itemSingle__purchase">
-                            <button data-item-id={{this.id}} id="subButton" class="btn" href="#">Submit Comment</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <hr class="mt-4 mb-2">
+        <h3 class="mb-5">Comments</h3>
         <div class="row">
             <div class="col-8">
                 {{#each this.BegComments}}
                 {{log this}}
-                <div class="row mb-2">
-                    <div class="col-3 commentNameTile mr-2">Comment By: {{this.User.userName}}</div>
-                    <div class="col-8 commentTextTile">Comment Text: {{this.text}}</div>
-                    {{!-- <div class="col-2">TimeStamp: {{this.createdAt}}</div> --}}
+                <div class="row mb-3">
+                    <a href="/user/{{this.UserId}}" class="col-2">
+                        <h4>{{this.User.name}}</h4>
+                    </a>
+                    <div class="col-8">
+                        <div class="commentTextTile" style="display: table; clear: both">{{this.text}}</div>
+                        {{!-- <div class="col-12">{{this.createdAt}}</div> --}}
+                    </div>
                 </div>
                 {{/each}}
 
 
+            </div>
+        </div>
+        <hr class="mt-4 mb-2">
+
+        <h3 for="user-comment-box" class="d-block mt-5">New Comments</h3>
+        <div class="row">
+            <div class="col-7 p-3">
+                <div class="row">
+                    <textarea id="user-comment-box" rows="3" class="col-12 commentTextTile border-0"></textarea>
+                </div>
+            </div>
+            <div class="itemSingle__buttonsContainer col-1">
+                <div class="itemSingle__purchase">
+                    <button data-item-id={{this.id}} id="subButton" class="btn mr-5" href="#">Comment</button>
+                </div>
             </div>
         </div>
     </div>
