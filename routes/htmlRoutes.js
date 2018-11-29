@@ -37,7 +37,12 @@ module.exports = function(app) {
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: { model: db.User } }]
+      include: [
+        {
+          model: db.Item,
+          include: { model: db.User, attributes: { exclude: ["password"] } }
+        }
+      ]
       // logging: sqlLogger
     }).then(function(dbItems) {
       sortByItemScoreSum(dbItems);
@@ -73,7 +78,12 @@ module.exports = function(app) {
         "ItemId"
       ],
       group: ["ItemId"],
-      include: [{ model: db.Item, include: [{ model: db.User }] }]
+      include: [
+        {
+          model: db.Item,
+          include: [{ model: db.User, attributes: { exclude: ["password"] } }]
+        }
+      ]
     }).then(function(dbItems) {
       // Sort Items by itemScore from High to Low (located in /config/middleware/voteSortLogic)
       sortByItemScoreSum(dbItems);
@@ -135,13 +145,14 @@ module.exports = function(app) {
     db.Item.findAll({
       where: { id: req.params.id },
       include: [
-        { model: db.User },
+        { model: db.User, attributes: { exclude: ["password"] } },
         { model: db.Vote },
         {
           model: db.BegComment,
           include: [
             {
-              model: db.User
+              model: db.User,
+              attributes: { exclude: ["password"] }
             }
           ]
         }
