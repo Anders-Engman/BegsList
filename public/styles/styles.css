@@ -172,7 +172,7 @@
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
 }
 
-.layout__item>a {
+.layout__item > a {
   display: flex;
   align-items: center;
 }
@@ -222,7 +222,8 @@ a:hover {
   opacity: 0.75;
 }
 
-.typography__navbar {}
+.typography__navbar {
+}
 
 .typography__site-heading {
   font-size: 2.5rem;
@@ -409,6 +410,7 @@ footer {
 }
 
 /* ==== Single User Template View ==== */
+
 .userSingle__userDetails h2 {
   display: inline-block;
   font-family: "Bentham", serif;
@@ -458,6 +460,7 @@ footer {
 }
 
 /* ==== Login/Sign-Up Modal Styles ==== */
+
 .layout__inline-user {
   color: #777;
 }
@@ -470,7 +473,6 @@ footer {
 .img-item-size {
   height: auto;
   width: 100%;
-
 }
 
 .bg-img-search {
@@ -478,4 +480,13 @@ footer {
   background-size: 100% 110%;
   height: 35rem;
   color: white;
+}
+
+.commentNameTile,
+.commentTextTile {
+  font-family: "Open Sans", sans-serif;
+  padding: 12px 24px;
+  background-color: #eee;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.65);
 }

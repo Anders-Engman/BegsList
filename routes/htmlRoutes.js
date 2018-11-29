@@ -19,13 +19,13 @@ sqlLogger = function(msg) {
 // Console log rank and color
 logRankAndColor = function(results) {
   for (var i = 0; i < results.length; i++) {
-    console.log(
-      results[i].dataValues.Item.name,
-      "-",
-      results[i].dataValues.itemScore,
-      "votes. Color:",
-      results[i].dataValues.Color
-    );
+    // // console.log(
+    //   results[i].dataValues.Item.name,
+    //   "-",
+    //   results[i].dataValues.itemScore,
+    //   "votes. Color:",
+    //   results[i].dataValues.Color
+    // );
   }
 };
 
@@ -64,7 +64,7 @@ module.exports = function(app) {
     //   name: name
     // };
 
-    console.log(req.user);
+    // console.log(req.user);
 
     //On homepage load, find the SUM of every ItemId's voteValue, sequelize returns this data by ItemId ascending
     db.Vote.findAll({
@@ -137,10 +137,16 @@ module.exports = function(app) {
       include: [
         { model: db.User },
         { model: db.Vote },
-        { model: db.BegComment }
+        {
+          model: db.BegComment,
+          include: [
+            {
+              model: db.User
+            }
+          ]
+        }
       ]
     }).then(function(dbItem) {
-      // console.log(dbItem);
       if (req.user) {
         db.Vote.findAll({
           where: { UserId: req.user.id }
@@ -170,7 +176,7 @@ module.exports = function(app) {
 
   // Load User Template - pass db Item via ItemId
   app.get("/user/:id", function(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
     db.User.findAll({
       where: {
         id: req.params.id

@@ -24,9 +24,9 @@ $(document).ready(function() {
           UserId: userId
         }
       }).then(function(response) {
-        console.log(response);
-        console.log(voteValue);
-        console.log(response.voteValue);
+        // console.log(response);
+        // console.log(voteValue);
+        // console.log(response.voteValue);
         if (Number.parseInt(response.voteValue) > 0) {
           $(
             ".layout__vote-content [data-id=" +
@@ -74,6 +74,6 @@ $(document).ready(function() {
   });
 
   $(".up-vote [data-id='1']").on("click", function(e) {
-    console.this.addClass("selected-up-vote");
+    this.addClass("selected-up-vote");
   });
 });

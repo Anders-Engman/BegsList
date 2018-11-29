@@ -5,9 +5,9 @@ var request = require("request");
 
 module.exports = function(app) {
   app.post("/api/comments", function(req, res) {
-    console.log(req.body);
-    console.log(req.user);
-    console.log(req.body.text);
+    // console.log(req.body);
+    // console.log(req.user);
+    // console.log(req.body.text);
     if (req.user) {
       var commentObj = {
         ItemId: req.body.ItemId,
@@ -24,11 +24,11 @@ module.exports = function(app) {
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
       .then(function(dbUser) {
-        console.log(dbUser);
+        // console.log(dbUser);
         res.send(dbUser);
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
         res.json(err);
       });
   });
@@ -41,7 +41,7 @@ module.exports = function(app) {
   app.get("/api/items", function(req, res) {
     db.Item.findAll({}).then(function(dbItem) {
       res.json(dbItem);
-      console.log(dbItem);
+      // console.log(dbItem);
     });
   });
 
@@ -108,7 +108,7 @@ module.exports = function(app) {
 
   //POST route for a new item
   app.post("/api/items", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     db.Item.create({
       name: req.body.name,
       itemURL: req.body.itemURL,
@@ -135,18 +135,18 @@ module.exports = function(app) {
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
       .then(function(dbUser) {
-        console.log(dbUser);
+        // console.log(dbUser);
         res.redirect(307, "/api/log-in");
       })
       .catch(function(err) {
-        console.log(err);
+        // console.log(err);
         res.json(err);
       });
   });
   // log in user
   app.get("/api/log-in", function(req, res) {
     res.render("test", passport.authenticate("local"), function(req, res) {
-      console.log("hey");
+      // console.log("hey");
       res.json(req.body.user);
     });
   });
@@ -162,7 +162,7 @@ module.exports = function(app) {
 
   // Toggle Vote by UserId, ItemId, and voteValue
   app.post("/api/votes", function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
 
     // Search Database to see if a Vote for that ItemId has been made by that UserId
     db.Vote.find({
@@ -173,7 +173,7 @@ module.exports = function(app) {
     }).then(vote => {
       // If that Vote DOES NOT exist,
       if (!vote) {
-        console.log("new vote!");
+        // console.log("new vote!");
 
         // Create that vote
         db.Vote.create({
@@ -186,7 +186,7 @@ module.exports = function(app) {
       }
       // If the Vote DOES exist,
       else {
-        console.log("existing vote!");
+        // console.log("existing vote!");
         //check to see if the voteValue is equal
         if (
           Number.parseInt(vote.voteValue) !==
@@ -198,13 +198,13 @@ module.exports = function(app) {
               UserId: req.body.UserId
             }
           }).then(vote => {
-            console.log("old vote deleted");
+            // console.log("old vote deleted");
             db.Vote.create({
               voteValue: req.body.voteValue,
               ItemId: req.body.ItemId,
               UserId: req.body.UserId
             }).then(vote => {
-              console.log("new vote created");
+              // console.log("new vote created");
               res.json(vote);
             });
           });
@@ -216,7 +216,7 @@ module.exports = function(app) {
               UserId: req.body.UserId
             }
           }).then(vote => {
-            console.log("old vote deleted, no new one created");
+            // console.log("old vote deleted, no new one created");
             res.json(vote);
           });
         }
