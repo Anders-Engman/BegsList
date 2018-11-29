@@ -12,7 +12,6 @@
                         <a href="/user/{{this.UserId}}">
                             <img src="{{this.User.imageURL}}" alt="" class="img-fluid">
                         </a>
-                        <div class="itemSingle__begScore">Begometer No.: <span class="itemSingle__userScore">{{this.User.begScore}}</span></div>
                         <div class="itemSingle__userText">
                             <a href="/user/{{this.UserId}}">
                                 <h4>{{this.User.name}}</h4>
@@ -41,44 +40,38 @@
             </div>
         </div>
     </div>
+    {{/each}}
 </div>
-<div id="comments" class="layout__comments-section">
-    {{#each this.comments}}
-    <div class="row">
-
-        <div class="col-md-3">
-            <!-- Fuck this shit how does any of this shit work -->
-            <h5>{{this.user}}</h5>
-        </div>
-
-        <div class="col-md-9">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-
-        <!-- This too, what the fuck -->
-        <div class="col-md-4">
-            <p>{{this.comments}}</p>
-        </div>
-
-        <div class="col-md-4">
+<div id="comments" class="layout__comments-section container mt-5">
+    {{#each item}}
+    <div class="col-xl-12 col-lg-10 col-lg-offset-1 col-12">
+        <div class="row">
+            <div class="col-8">
+                {{#each this.BegComments}}
+                {{log this}}
+                <div class="row">
+                    <div class="col-12">
+                        <p>{{this.text}}</p>
+                    </div>
+                </div>
+                {{/each}}
+                <hr class="mt-4 mb-2">
+                <div class="row">
+                    <form>
+                        <div class="form-group">
+                            <label for="user-comment-box" class="d-block">Comments</label>
+                            <textarea id="user-comment-box" rows="4" cols="50"></textarea>
+                            <div class="itemSingle__buttonsContainer">
+                                <div class="itemSingle__purchase">
+                                    <button data-item-id={{this.id}} id="subButton" class="btn" href="#">Submit Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     {{/each}}
-    <div class="form-group">
-        <div id="commentsArea">
-        </div>
-        <label for="exampleFormControlTextarea1">Comments</label>
-        <input type="text" id="comTextArea" rows="3"></input>
-        <div class="itemSingle__buttonsContainer">
-            <div class="itemSingle__purchase">
-                <button data-itemID={{this.id}} id="subButton" href="#">Submit Comment</button>
-            </div>
-        </div>
-    </div>
 </div>
-{{/each}}

@@ -7,13 +7,19 @@ module.exports = function(app) {
   app.post("/api/comments", function(req, res) {
     console.log(req.body);
     console.log(req.user);
-    console.log(req.body.commentText);
-    var commentObj = {
-      ItemId: req.body.itemId,
-      text: req.body.commmentText,
-      UserId: req.user.id
-    };
-    db.Comment.create(commentObj).then(function() {});
+    console.log(req.body.text);
+    if (req.user) {
+      var commentObj = {
+        ItemId: req.body.ItemId,
+        text: req.body.text,
+        UserId: req.user.id
+      };
+      db.BegComment.create(commentObj).then(function(dbComment) {
+        res.json(dbComment);
+      });
+    } else {
+      res.json(false);
+    }
   });
   app.post("/api/sign-up", function(req, res) {
     db.User.create(req.body)
@@ -110,11 +116,10 @@ module.exports = function(app) {
       imageURL: req.body.imageURL,
       UserId: req.user.id
     }).then(function(dbItem) {
-      
-      //When a new chosen item is selected, 
+      //When a new chosen item is selected,
       //a upVote value is added to the Vote table
-      //for displaying purpose 
-      //(if no vote value, then no item will be displayed 
+      //for displaying purpose
+      //(if no vote value, then no item will be displayed
       //-- See htmlRoutes for the logic!)
       db.Vote.create({
         voteValue: 1,

@@ -116,12 +116,12 @@ module.exports = function(app) {
     });
   });
 
-    //Load About Page 
-    app.get("/about", function (req, res) {
-      res.render("about", {
-        user: req.user
-      });
+  //Load About Page
+  app.get("/about", function(req, res) {
+    res.render("about", {
+      user: req.user
     });
+  });
 
   app.get("/test-modal", function(req, res) {
     res.render("test", {
@@ -134,38 +134,26 @@ module.exports = function(app) {
     // console.log(req.user);
     db.Item.findAll({
       where: { id: req.params.id },
-      include: [{ model: db.User }, { model: db.Vote }]
+      include: [
+        { model: db.User },
+        { model: db.Vote },
+        { model: db.BegComment }
+      ]
     }).then(function(dbItem) {
+      // console.log(dbItem);
       if (req.user) {
         db.Vote.findAll({
           where: { UserId: req.user.id }
         }).then(function(userVotes) {
-          db.Comment.findAll({ where: { ItemId: req.params.id } }).then(
-            function(itemComments) {
-              var itemCommentsParse = [];
-              for (var i = 0; i < itemComments.length; i++) {
-                db.User.findOne({ where: { id: itemComments[i].UserId } }).then(
-                  function(comUser) {
-                    var blobToPush = {
-                      UserID: comUser.Id,
-                      text: itemComments[i].commentText
-                    };
-                    itemCommentsParse.push(blobToPush);
-                  }
-                );
-              }
-              res.render("item-single", {
-                item: dbItem,
-                comments: itemCommentsParse,
-                user: req.user,
-                userInfo: userVotes,
-                helpers: {
-                  plusMinusVoteCount: plusMinusVoteCount,
-                  applySelected: applySelected
-                }
-              });
+          res.render("item-single", {
+            item: dbItem,
+            user: req.user,
+            userInfo: userVotes,
+            helpers: {
+              plusMinusVoteCount: plusMinusVoteCount,
+              applySelected: applySelected
             }
-          );
+          });
         });
       } else {
         res.render("item-single", {
